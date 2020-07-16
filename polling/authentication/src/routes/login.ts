@@ -3,11 +3,11 @@ import { body } from "express-validator";
 import jwt from "jsonwebtoken";
 import { User } from "../models/user";
 import bcrypt from "bcrypt";
+import uri from "./uris"
 
 const router = express.Router();
 
-router.post(
-  "/api/members/login",
+router.post(uri.LOGIN,
   [
     body("email").isEmail().withMessage("Invalid Email"),
     body("password").trim().notEmpty().withMessage("Empty Password"),

@@ -2,11 +2,11 @@ import express, { Request, Response } from "express";
 import { body } from "express-validator";
 import jwt from "jsonwebtoken";
 import { User } from "../models/user";
+import uri from "./uris"
 
 const router = express.Router();
 
-router.post(
-  "/api/members/register",
+router.post(uri.REGISTER,
   [
     body("email")
         .isEmail()
