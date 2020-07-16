@@ -7,14 +7,14 @@ interface UserFields {
   password: string;
 }
 
+interface UserDocument extends mongoose.Document {
+    email: string;
+    username: string;
+    password: string;
+  }
+
 interface UserModel extends mongoose.Model<UserDocument> {
   build(fields: UserFields): UserDocument;
-}
-
-interface UserDocument extends mongoose.Document {
-  email: string;
-  username: string;
-  password: string;
 }
 
 const userSchema = new mongoose.Schema(
