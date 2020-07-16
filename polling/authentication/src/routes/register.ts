@@ -8,7 +8,12 @@ const router = express.Router();
 router.post(
   "/api/members/register",
   [
-    body("email").isEmail().withMessage("Invalid Email"),
+    body("email")
+        .isEmail()
+        .withMessage("Invalid Email"),
+    body("username")
+        .notEmpty()
+        .withMessage("Username has to be prodided"),
     body("password")
       .trim()
       .isLength({ min: 8 })

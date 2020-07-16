@@ -1,26 +1,44 @@
-import express, {Request, Response} from "express"
-import { body } from 'express-validator'
-import jwt from 'jsonwebtoken'
+import express, { Request, Response } from "express";
+import { body } from "express-validator";
+import jwt from "jsonwebtoken";
+import { User } from "../models/user";
+import bcrypt from "bcrypt";
 
-const router = express.Router()
+const router = express.Router();
 
-router.post("/api/members/login", async (req: Request, res: Response) => {
-    const {email, password} = req.body
+router.post(
+  "/api/members/login",
+  [
+    body("email").isEmail().withMessage("Invalid Email"),
+    body("password").trim().notEmpty().withMessage("Empty Password"),
+  ],
+  async (req: Request, res: Response) => {
+    const { email, password } = req.body;
 
-    // validate
+    const user = await User.findOne({ email });
+    if (!user) {
+      throw new Error("Invalid credentials");
+    }
 
-    // check db if user exists, if not throw an error
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      throw new Error("Invalid Credentials");
+    }
 
-    // check if password matches the pw in the db, if not throw an error
+    const userJwt = jwt.sign(
+      {
+        id: user.id,
+        username: user.username,
+      },
+      process.env.JWT_SECRET!
+    );
 
-    // generate JWT
+    req.session = {
+      jwt: userJwt,
+    };
 
-    // store in session
+    res.status(200).send(user);
+  }
+);
 
-    // send user back
-
-    res.send({})
-
-})
-
-export {router as loginRouter}
+export { router as loginRouter };
