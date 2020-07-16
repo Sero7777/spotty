@@ -1,13 +1,11 @@
-import express, {Request, Response} from "express"
+import express, { Request, Response } from "express";
 
-const router = express.Router()
+const router = express.Router();
 
-router.post("/api/members/logout", async (req: Request, res:Response) => {
-    // clear session
+router.post("/api/members/logout", async (req: Request, res: Response) => {
+  req.session = null;
 
-    // send empty reponse back
+  res.send({});
+});
 
-    res.send({})
-})
-
-export {router as logoutRouter}
+export { router as logoutRouter };
