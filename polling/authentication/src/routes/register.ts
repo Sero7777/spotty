@@ -1,27 +1,52 @@
-import express, {Request, Response} from "express";
+import express, { Request, Response } from "express";
 import { body } from "express-validator";
 import jwt from "jsonwebtoken";
+import { User } from "../models/user";
 
 const router = express.Router();
 
-router.post("/api/members/register", async (req: Request, res: Response) => {
-    const {email, password, userName} = req.body;
+router.post(
+  "/api/members/register",
+  [
+    body("email").isEmail().withMessage("Invalid Email"),
+    body("password")
+      .trim()
+      .isLength({ min: 8 })
+      .withMessage("Password must have a length of at least 8 characters"),
+  ],
+  async (req: Request, res: Response) => {
+    const { email, password, username } = req.body;
 
-    // validate
+    const userMail = await User.findOne({ email });
 
-    // check if someone with this mail or this username exists in db already, if yes throw an error
+    if (userMail) {
+      throw new Error("Taken email");
+    }
 
-    // create this user via mongoose.schema
+    const userName = await User.findOne({ username });
 
-    // save this user to mongoDB
+    if (username) {
+      throw new Error("Taken username");
+    }
 
-    // create a JWT
+    const user = User.build({ email, username, password });
 
-    // store it in session
+    await user.save();
 
-    // send response back with this user as payload and status 201
+    const userJwt = jwt.sign(
+      {
+        id: user.id,
+        username: user.username,
+      },
+      process.env.JWT_SECRET!
+    );
 
-    res.send({})
-});
+    req.session = {
+      jwt: userJwt,
+    };
+
+    res.status(201).send(user);
+  }
+);
 
 export { router as registerRouter };
