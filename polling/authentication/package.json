@@ -8,6 +8,13 @@
     "test:local": "jest --watchAll --no-cache",
     "test:remote": "jest"
   },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": [
+      "./src/test/initialize.ts"
+    ]
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -24,13 +31,15 @@
     "express-validator": "^6.6.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.24",
-    "ts-node-dev": "^1.0.0-pre.52"
+    "ts-node-dev": "^1.0.0-pre.52",
+    "typescript": "^3.9.7"
   },
   "devDependencies": {
     "@types/jest": "^26.0.4",
     "@types/supertest": "^2.0.10",
     "jest": "^26.1.0",
     "mongodb-memory-server": "^6.6.1",
-    "supertest": "^4.0.2"
+    "supertest": "^4.0.2",
+    "ts-jest": "^26.1.3"
   }
 }

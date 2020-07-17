@@ -2,12 +2,12 @@ import express, { Request, Response } from "express";
 import { body } from "express-validator";
 import jwt from "jsonwebtoken";
 import { User } from "../models/user";
-import uri from "./uris"
+import {Uri} from "./uris"
 import InvalidRequestException from "../exceptions/InvalidRequestException"
 
 const router = express.Router();
 
-router.post(uri.REGISTER,
+router.post(Uri.REGISTER,
   [
     body("email")
         .isEmail()

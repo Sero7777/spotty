@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-import uris from "./uris";
+import {Uri} from "./uris";
 
 interface User {
   id: string;
@@ -31,7 +31,7 @@ const user = (req: Request, res: Response, next: NextFunction) => {
 
 const router = express.Router();
 
-router.get(uris.USER, user, async (req: Request, res: Response) => {
+router.get(Uri.USER, user, async (req: Request, res: Response) => {
   res.send({ user: req.user || null });
 });
 

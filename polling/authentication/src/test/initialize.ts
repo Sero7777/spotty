@@ -1,8 +1,8 @@
 import { MongoMemoryServer } from "mongodb-memory-server";
 import mongoose from "mongoose";
 import request from "supertest";
-import app from "../app";
-import uris from "../routes/uris"
+import {app} from "../app";
+import {Uri} from "../routes/uris"
 
 declare global {
   namespace NodeJS {
@@ -38,7 +38,7 @@ afterAll(async () => {
 
 global.login = async () => {
 
-  const response = await request(app).post(uris.REGISTER).send({
+  const response = await request(app).post(Uri.REGISTER).send({
     email: "user@user.com",
     password: "test1234",
     username: "user1234"
