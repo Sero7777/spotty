@@ -4,6 +4,7 @@ import cookieSession from "cookie-session";
 import { registerRouter } from "./routes/register";
 import { loginRouter } from "./routes/login";
 import { logoutRouter } from "./routes/logout";
+import { userRouter } from "./routes/user"
 
 const app = express();
 
@@ -12,5 +13,6 @@ app.use(cookieSession({ signed: false, secure: false }));
 app.use(registerRouter);
 app.use(loginRouter);
 app.use(logoutRouter)
+app.use(userRouter)
 
 export { app };
