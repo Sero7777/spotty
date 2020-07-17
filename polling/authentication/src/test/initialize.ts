@@ -1,9 +1,8 @@
 import { MongoMemoryServer } from "mongodb-memory-server";
 import mongoose from "mongoose";
 import request from "supertest";
-import { app } from "../app";
+import app from "../app";
 import uris from "../routes/uris"
-import { userRouter } from "../routes/user";
 
 declare global {
   namespace NodeJS {

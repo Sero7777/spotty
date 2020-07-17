@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 
+
 interface UserFields {
   email: string;
   username: string;
