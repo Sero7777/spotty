@@ -6,6 +6,7 @@ import { loginRouter } from "./routes/login";
 import { logoutRouter } from "./routes/logout";
 import { userRouter } from "./routes/user"
 import 'express-async-errors';
+import exceptionHandler from "./exceptions/exceptionHandler"
 
 const app = express();
 
@@ -15,5 +16,6 @@ app.use(registerRouter);
 app.use(loginRouter);
 app.use(logoutRouter)
 app.use(userRouter)
+app.use(exceptionHandler)
 
-export { app };
+export default app;
