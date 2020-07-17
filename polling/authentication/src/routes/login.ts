@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import { User } from "../models/user";
 import bcrypt from "bcrypt";
 import uri from "./uris"
+import InvalidRequestException from "../exceptions/InvalidRequestException"
 
 const router = express.Router();
 
@@ -17,12 +18,12 @@ router.post(uri.LOGIN,
 
     const user = await User.findOne({ email });
     if (!user) {
-      throw new Error("Invalid credentials");
+      throw new InvalidRequestException("Invalid credentials");
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      throw new Error("Invalid Credentials");
+      throw new InvalidRequestException("Invalid Credentials");
     }
 
     const userJwt = jwt.sign(

@@ -3,6 +3,7 @@ import { body } from "express-validator";
 import jwt from "jsonwebtoken";
 import { User } from "../models/user";
 import uri from "./uris"
+import InvalidRequestException from "../exceptions/InvalidRequestException"
 
 const router = express.Router();
 
@@ -25,13 +26,13 @@ router.post(uri.REGISTER,
     const userMail = await User.findOne({ email });
 
     if (userMail) {
-      throw new Error("Taken email");
+      throw new InvalidRequestException("Taken email");
     }
 
     const userName = await User.findOne({ username });
 
     if (username) {
-      throw new Error("Taken username");
+      throw new InvalidRequestException("Taken username");
     }
 
     const user = User.build({ email, username, password });
