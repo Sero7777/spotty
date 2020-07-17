@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import OwnException from './ownException';
+import OwnException from './OwnException';
 
 const errorHandler = (
   err: Error,

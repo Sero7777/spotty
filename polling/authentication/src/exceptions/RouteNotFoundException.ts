@@ -1,4 +1,4 @@
-import OwnException from './ownException';
+import OwnException from './OwnException';
 
 export default class RouteNotFoundException extends OwnException {
   statusCode = 404;
