@@ -1,7 +1,7 @@
 import request from "supertest";
 import { app } from "../app";
 
-it("returns a 201 on successful signup", async () => {});
+it("returns a 201 on successful registration", async () => {});
 
 it("returns a 400 with an invalid email", async () => {});
 
