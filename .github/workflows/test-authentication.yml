@@ -8,4 +8,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: cd authentication && npm install && npm run test:remote
+      - run: cd polling/authentication && npm install && npm run test:remote
