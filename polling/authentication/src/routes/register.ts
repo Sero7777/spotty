@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import { User } from "../models/user";
 import {Uri} from "./uris"
 import InvalidRequestException from "../exceptions/InvalidRequestException"
+import requestValidator from "../services/requestValidator"
 
 const router = express.Router();
 
@@ -20,6 +21,7 @@ router.post(Uri.REGISTER,
       .isLength({ min: 8 })
       .withMessage("Password must have a length of at least 8 characters"),
   ],
+  requestValidator,
   async (req: Request, res: Response) => {
     const { email, password, username } = req.body;
 
@@ -31,7 +33,7 @@ router.post(Uri.REGISTER,
 
     const userName = await User.findOne({ username });
 
-    if (username) {
+    if (userName) {
       throw new InvalidRequestException("Taken username");
     }
 

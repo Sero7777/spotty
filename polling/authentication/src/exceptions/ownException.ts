@@ -3,6 +3,8 @@ export default abstract class OwnException extends Error {
 
     constructor(message: string) {
         super(message)
+
+    Object.setPrototypeOf(this, OwnException.prototype);
     }
 
     abstract setErrors(): {message: string; field?: string}[]

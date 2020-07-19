@@ -47,7 +47,7 @@ userSchema.statics.build = (fields: UserFields) => {
   return new User(fields);
 };
 
-userSchema.statics.pre("save", async function (next) {
+userSchema.pre("save", async function (this: UserDocument, next: any) {
   const user = this;
 
   if (user.isModified("password")) {

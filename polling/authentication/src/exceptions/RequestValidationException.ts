@@ -6,6 +6,8 @@ export default class RequestValidationError extends OwnException {
 
   constructor(public errors: ValidationError[]) {
     super('Invalid request');
+    
+    Object.setPrototypeOf(this, RequestValidationError.prototype);
   }
 
   setErrors() {

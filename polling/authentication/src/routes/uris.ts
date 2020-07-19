@@ -1,6 +1,6 @@
 export enum Uri {
-    LOGIN = "/api/members/login",
-    LOGOUT = "/api/members/logout",
-    REGISTER = "/api/members/register",
-    USER = "/api/members/user"
+    LOGIN = "/api/users/login",
+    LOGOUT = "/api/users/logout",
+    REGISTER = "/api/users/register",
+    USER = "/api/users/user"
 }

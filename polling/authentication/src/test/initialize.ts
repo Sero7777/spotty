@@ -1,8 +1,8 @@
 import { MongoMemoryServer } from "mongodb-memory-server";
 import mongoose from "mongoose";
 import request from "supertest";
-import {app} from "../app";
-import {Uri} from "../routes/uris"
+import { app } from "../app";
+import { Uri } from "../routes/uris";
 
 declare global {
   namespace NodeJS {
@@ -14,6 +14,7 @@ declare global {
 
 let mongo: any;
 beforeAll(async () => {
+  process.env.JWT_SECRET = "asdfasdf";
   mongo = new MongoMemoryServer();
   const mongoUri = await mongo.getUri();
 
@@ -37,14 +38,16 @@ afterAll(async () => {
 });
 
 global.login = async () => {
+  const response = await request(app)
+    .post(Uri.REGISTER)
+    .send({
+      email: "user@user.com",
+      password: "test1234",
+      username: "user1234",
+    })
+    .expect(201);
 
-  const response = await request(app).post(Uri.REGISTER).send({
-    email: "user@user.com",
-    password: "test1234",
-    username: "user1234"
-  }).expect(201)
-
-  const cookie = response.get('Set-Cookie');
+  const cookie = response.get("Set-Cookie");
 
   return cookie;
-}
+};

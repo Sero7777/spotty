@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: authentication-mongo-deployment
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            name: authentication-mongo
+    template:
+      metadata:
+        labels:
+            name: authentication-mongo
+      spec:
+          containers:
+              - name: authentication-mongo
+                image: mongo

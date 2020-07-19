@@ -1,5 +1,5 @@
-// import request from "supertest";
-const request = require("supertest");
+import request from "supertest";
+// const request = require("supertest");
 import { app } from "../app";
 import { Uri } from "../routes/uris";
 

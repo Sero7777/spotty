@@ -1,8 +1,8 @@
-import {app} from "./app";
-import mongoose from "mongoose"
+import { app } from "./app";
+import mongoose from "mongoose";
 
 const initialize = async () => {
-  if (!process.env.JWT_KEY) {
+  if (!process.env.JWT_SECRET) {
     throw new Error("jwt secret is not provided");
   }
   if (!process.env.MONGO_URL) {
@@ -10,12 +10,12 @@ const initialize = async () => {
   }
 
   try {
-    await mongoose.connect(process.env.MONGO_URL, { 
+    await mongoose.connect(process.env.MONGO_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      useCreateIndex: true,
+      useCreateIndex: true
     });
-    console.log('Connected to Database');
+    console.log("Connected to Database");
   } catch (err) {
     console.error(err);
   }
@@ -25,4 +25,6 @@ const initialize = async () => {
   });
 };
 
-initialize()
+initialize();
+
+// in newer node versions you wont have to wrap the monogoose connection process inside a function

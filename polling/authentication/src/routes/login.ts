@@ -5,6 +5,7 @@ import { User } from "../models/user";
 import bcrypt from "bcrypt";
 import {Uri} from "./uris"
 import InvalidRequestException from "../exceptions/InvalidRequestException"
+import requestValidator from "../services/requestValidator"
 
 const router = express.Router();
 
@@ -13,17 +14,18 @@ router.post(Uri.LOGIN,
     body("email").isEmail().withMessage("Invalid Email"),
     body("password").trim().notEmpty().withMessage("Empty Password"),
   ],
+  requestValidator,
   async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
     if (!user) {
-      throw new InvalidRequestException("Invalid credentials");
+      throw new InvalidRequestException("Invalid username");
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      throw new InvalidRequestException("Invalid Credentials");
+      throw new InvalidRequestException("Invalid password");
     }
 
     const userJwt = jwt.sign(
