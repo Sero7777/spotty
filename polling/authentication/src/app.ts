@@ -8,11 +8,20 @@ import { logoutRouter } from "./routes/logout";
 import { userRouter } from "./routes/user";
 import exceptionHandler from "./exceptions/exceptionHandler";
 import RouteNotFoundException from "./exceptions/RouteNotFoundException";
+import cors from "cors";
 
 const app = express();
 
+var corsOptions = {
+    origin: 'http://localhost:3000',
+    optionsSuccessStatus: 200,
+    credentials: true
+  }
+
+app.set('trust proxy', true);
 app.use(json());
-app.use(cookieSession({ signed: false, secure: false }));
+app.use(cors(corsOptions))
+app.use(cookieSession({ signed: false, secure: false}));
 app.use(registerRouter);
 app.use(loginRouter);
 app.use(logoutRouter);
