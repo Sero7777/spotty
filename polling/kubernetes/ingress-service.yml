@@ -13,4 +13,8 @@ spec:
           - path: /api/users/?(.*)
             backend:
               serviceName: authentication-service
-              servicePort: 4000
+              servicePort: 3000
+          - path: /?(.*)
+            backend:
+              serviceName: client-service
+              servicePort: 3000
