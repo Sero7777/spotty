@@ -4,8 +4,7 @@ import jwt from "jsonwebtoken";
 import { User } from "../models/user";
 import bcrypt from "bcrypt";
 import {Uri} from "./uris"
-import InvalidRequestException from "../exceptions/InvalidRequestException"
-import requestValidator from "../services/requestValidator"
+import {InvalidRequestException, requestValidator} from "@spotty/shared"
 
 const router = express.Router();
 

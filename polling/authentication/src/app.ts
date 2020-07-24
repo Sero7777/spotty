@@ -6,8 +6,7 @@ import { registerRouter } from "./routes/register";
 import { loginRouter } from "./routes/login";
 import { logoutRouter } from "./routes/logout";
 import { userRouter } from "./routes/user";
-import exceptionHandler from "./exceptions/exceptionHandler";
-import RouteNotFoundException from "./exceptions/RouteNotFoundException";
+import {RouteNotFoundException, errorHandler as exceptionHandler} from "@spotty/shared"
 import cors from "cors";
 
 const app = express();
