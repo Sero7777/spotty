@@ -2,19 +2,22 @@ import React from "react";
 import { connect } from "react-redux"
 import { Link } from "react-router-dom";
 import LoginForm from "./LoginForm"
-import {logIn} from "../actions/index"
+import { logIn } from "../actions/index"
+import ActionBar from "./ActionBar"
 
 const Header = (props) => {
     const onSubmit = async formValues => {
         return await props.logIn(formValues)
     }
-    
+
     const loginBar = (props) => {
-        switch (props.loggedIn){
+        switch (props.loggedIn) {
             case true:
-                return <div>Hallo welt</div>
+                console.log("Activated ACB")
+                return <ActionBar />
             default:
-                return <LoginForm onSubmit={onSubmit}/>
+                console.log("Activated LGF")
+                return <LoginForm onSubmit={onSubmit} />
         }
     }
 
@@ -30,7 +33,7 @@ const Header = (props) => {
 }
 
 const mapStateToProps = state => {
-    return { loggedIn: state.user !== null ? true : false };
+    return { loggedIn: state.user.username !== null ? true : false };
 };
 
-export default connect(mapStateToProps, {logIn})(Header)
+export default connect(mapStateToProps, { logIn })(Header)

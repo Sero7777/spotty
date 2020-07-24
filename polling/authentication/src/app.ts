@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import 'express-async-errors';
+import "express-async-errors";
 import { json } from "body-parser";
 import cookieSession from "cookie-session";
 import { registerRouter } from "./routes/register";
@@ -13,15 +13,15 @@ import cors from "cors";
 const app = express();
 
 var corsOptions = {
-    origin: 'http://localhost:3000',
-    optionsSuccessStatus: 200,
-    credentials: true
-  }
+  origin: "http://localhost:3000",
+  optionsSuccessStatus: 200,
+  credentials: true,
+};
 
-app.set('trust proxy', true);
+app.set("trust proxy", true);
 app.use(json());
-app.use(cors(corsOptions))
-app.use(cookieSession({ signed: false, secure: false}));
+app.use(cors(corsOptions));
+app.use(cookieSession({ signed: false, secure: false, httpOnly: false }));
 app.use(registerRouter);
 app.use(loginRouter);
 app.use(logoutRouter);

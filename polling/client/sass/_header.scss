@@ -1,24 +1,45 @@
 .header {
-    background-color: #f7f7f7;
-    border-bottom: var(--line);
+  background-color: #f7f7f7;
+  border-bottom: var(--line);
 
-    height: 5%;
-    width: 100vw;
+  height: 5%;
+  width: 100vw;
 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__logo {
+    height: 3.25rem;
+  }
+
+  &__logo-name {
+    font-size: 3rem;
+    font-style: italic;
+  }
+
+  &__login__btn {
+    padding: 0 1rem;
+  }
+
+  &__loggedIn {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    height: 100%;
 
-    &__logo {
-        height: 3.25rem;
-    }
+    &__item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-    &__logo-name {
-        font-size: 3rem;
-        font-style: italic;
-    }
+      border: 1px solid white;
+      width: 5vw;
+      font-size: 2rem;
 
-    &__login__btn {
-        padding: 0 1rem;
+      cursor: pointer;
     }
+  }
+
+  &__logout-button {
+      align-self: center;
+  }
 }
