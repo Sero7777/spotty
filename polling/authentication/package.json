@@ -19,6 +19,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@spotty/shared": "^1.0.2",
     "@types/bcrypt": "^3.0.0",
     "@types/cookie-session": "^2.0.41",
     "@types/cors": "^2.8.6",
