@@ -1,20 +1,39 @@
 import React from "react";
+import { connect } from "react-redux"
 import { Link } from "react-router-dom";
+import LoginForm from "./LoginForm"
+import { logIn } from "../actions/index"
+import ActionBar from "./ActionBar"
 
-const Header = () => {
+const Header = (props) => {
+    const onSubmit = async formValues => {
+        return await props.logIn(formValues)
+    }
+
+    const loginBar = (props) => {
+        switch (props.loggedIn) {
+            case true:
+                console.log("Activated ACB")
+                return <ActionBar />
+            default:
+                console.log("Activated LGF")
+                return <LoginForm onSubmit={onSubmit} />
+        }
+    }
+
     return (
         <header className="header">
             <Link to="/">
                 <img src="#" alt="Spotty logo" className="header__logo mg-left-s" />
             </Link>
             <div className="header__logo-name">Spotty</div>
-            <form className="mg-right-xl" onSubmit={e => e.preventDefault()}>
-                <input type="text" className="mg-right-s" placeholder="email" />
-                <input type="text" className="mg-right-s" placeholder="password" />
-                <button className="header__login__btn">Login</button>
-            </form>
+            {loginBar(props)}
         </header>
     )
 }
 
-export default Header;
+const mapStateToProps = state => {
+    return { loggedIn: state.user.username !== null ? true : false };
+};
+
+export default connect(mapStateToProps, { logIn })(Header)

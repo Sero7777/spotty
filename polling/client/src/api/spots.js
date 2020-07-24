@@ -7,13 +7,13 @@ export const userRequest = axios.create({
 })
 
 export const spotRequest = axios.create({
-    baseURL: "spotty.com/api/spots"
+    baseURL: `${domainUrl}/spots`
 })
 
 export const commentRequest = axios.create({
-    baseURL: "spotty.com/api/comments"
+    baseURL: `${domainUrl}/comments`
 })
 
 export const queryRequest = axios.create({
-    baseURL: "spotty.com/api/query"
+    baseURL: `${domainUrl}/query`
 })

@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 
 const RegisterForm = (props) => {
     const initialValues = { email: "", username: "", password: "", passwordRepeat: "" }
+
     const validationSchema = Yup.object({
         email: Yup.string()
             .email("Invalid email address")
@@ -20,6 +21,7 @@ const RegisterForm = (props) => {
             .oneOf([Yup.ref("password"), null], "Passwords must match")
             .required("Required field")
     })
+    
     const onSubmit = async (formValues, {resetForm}) => {
         const response = await props.onSubmit(formValues)
 
@@ -56,10 +58,6 @@ const RegisterForm = (props) => {
             </Form>
         </Formik>
     )
-}
-
-const errorMessage = () => {
-
 }
 
 export default RegisterForm;

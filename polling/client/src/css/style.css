@@ -122,6 +122,9 @@ a {
 .pd-bottom-xl {
   padding-bottom: 8rem; }
 
+.pd-left-xs {
+  padding-left: .5rem; }
+
 .pd-left-s {
   padding-left: 2rem; }
 
@@ -133,6 +136,9 @@ a {
 
 .pd-left-xl {
   padding-left: 8rem; }
+
+.pd-right-xs {
+  padding-right: .5rem; }
 
 .pd-right-s {
   padding-right: 2rem; }
@@ -188,6 +194,9 @@ a {
 .mg-bottom-xl {
   margin-bottom: 8rem; }
 
+.mg-left-xs {
+  margin-left: .5rem; }
+
 .mg-left-s {
   margin-left: 2rem; }
 
@@ -239,6 +248,22 @@ a {
     font-style: italic; }
   .header__login__btn {
     padding: 0 1rem; }
+  .header__loggedIn {
+    display: flex;
+    height: 100%; }
+    .header__loggedIn__item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid white;
+      width: 5vw;
+      font-size: 2rem;
+      cursor: pointer; }
+    .header__loggedIn__username {
+      font-style: italic;
+      cursor: default; }
+  .header__logout-button {
+    align-self: center; }
 
 .footer {
   background-color: var(--color-grey-dark-1);

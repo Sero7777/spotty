@@ -5,25 +5,25 @@ import {
 import { userRequest } from "../api/spots";
 
 export const logIn = formValues => async dispatch => {
-    const response = await userRequest.post("/login", { ...formValues })
-
-    console.log("Response from login: " + response)
+    const response = await userRequest.post("/login", { ...formValues }, { withCredentials: true })
 
     if (response.status === 200) {
         const userResponse = await userRequest.get("/user")
-
-        console.log("Response from retrieving user: " + userResponse)
-
-        if (userResponse === 200) dispatch({ type: LOG_IN, payload: userResponse.data })
+        const { username } = userResponse.data.user
+        if (userResponse.status === 200) dispatch({ type: LOG_IN, payload: username })
     }
 
     return response
 }
 
-export const logOut = () => async dispatch => {
-    const response = await userRequest.get("/logout")
+export const getUser = () => async dispatch => {
+    const userResponse = await userRequest.get("/user")
+    const { username } = userResponse.data.user
+    if (userResponse.status === 200) dispatch({ type: LOG_IN, payload: username })
+}
 
-    console.log("Response from logout: " + response)
+export const logOut = () => async dispatch => {
+    const response = await userRequest.post("/logout", { withCredentials: true })
 
     if (response.status === 200) {
         dispatch({ type: LOG_OUT })
@@ -31,17 +31,12 @@ export const logOut = () => async dispatch => {
 }
 
 export const register = formValues => async dispatch => {
-
-    const response = await userRequest.post("/register", { ...formValues }, {withCredentials: true})
-
-    console.log("Response from registration: " + JSON.stringify(response))
+    const response = await userRequest.post("/register", { ...formValues }, { withCredentials: true })
 
     if (response.status === 201) {
         const userResponse = await userRequest.get("/user")
-
-        console.log("Response from retrieving user: " + JSON.stringify(userResponse))
-
-        if (userResponse === 200) dispatch({ type: LOG_IN, payload: userResponse.data })
+        const { username } = userResponse.data.user
+        if (userResponse.status === 200) dispatch({ type: LOG_IN, payload: username })
     }
 
     return response
