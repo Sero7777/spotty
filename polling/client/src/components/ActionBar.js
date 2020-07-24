@@ -16,7 +16,6 @@ const ActionBar = (props) => {
 
             <button onClick={onLogout} className="header__logout-button mg-left-s pd-left-xs pd-right-xs">Logout</button>
         </div>
-
     )
 }
 

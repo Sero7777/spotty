@@ -29,16 +29,10 @@ const App = (props) => {
                     <Redirect to="/register" />
                 </Route>
                 <PublicRoute exact path="/register" component={Register}/>
-                {/* <Route exact path="/register" component={Register} /> */}
                 <PrivateRoute exact path="/impressum" component={Impressum}/>
-                {/* <Route exact path="/impressum" component={Impressum} /> */}
             </div>
         </BrowserRouter>
     )
 }
-
-const mapStateToProps = state => {
-    return { loggedIn: state.user.username !== null ? true : false }
-};
 
 export default connect(null, { getUser })(App);

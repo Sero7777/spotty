@@ -11,7 +11,6 @@ const LoginForm = (props) => {
             .required("Required field"),
         password: Yup.string()
             .trim()
-            .min(8, "The password has to have at least 8 characters")
             .required("Required field")
     })
 
