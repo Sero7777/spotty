@@ -12,6 +12,7 @@ const ActionBar = (props) => {
             <ActionItem itemText="Add" />
             <ActionItem itemText="Filter" />
             <ActionItem itemText="List" />
+            <div className="header__loggedIn__username header__loggedIn__item mg-left-s mg-right-s">{props.username}</div>
 
             <button onClick={onLogout} className="header__logout-button mg-left-s pd-left-xs pd-right-xs">Logout</button>
         </div>
@@ -19,4 +20,8 @@ const ActionBar = (props) => {
     )
 }
 
-export default connect(null, { logOut })(ActionBar)
+const mapStateToProps = state => {
+    return { username: state.user.username };
+};
+
+export default connect(mapStateToProps, { logOut })(ActionBar)

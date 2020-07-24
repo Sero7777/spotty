@@ -8,6 +8,7 @@ import Register from "./Register";
 import Header from "./Header";
 import Impressum from "./Impressum";
 import PrivateRoute from "./PrivateRoute"
+import PublicRoute from "./PublicRoute"
 
 const App = (props) => {
 
@@ -27,7 +28,8 @@ const App = (props) => {
                 <Route exact path="/">
                     <Redirect to="/register" />
                 </Route>
-                <Route exact path="/register" component={Register} />
+                <PublicRoute exact path="/register" component={Register}/>
+                {/* <Route exact path="/register" component={Register} /> */}
                 <PrivateRoute exact path="/impressum" component={Impressum}/>
                 {/* <Route exact path="/impressum" component={Impressum} /> */}
             </div>

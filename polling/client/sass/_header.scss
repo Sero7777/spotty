@@ -37,6 +37,11 @@
 
       cursor: pointer;
     }
+
+    &__username {
+        font-style: italic;
+        cursor: default;
+    }
   }
 
   &__logout-button {
