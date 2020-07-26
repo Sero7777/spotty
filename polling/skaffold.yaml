@@ -16,6 +16,22 @@ build:
             manual:
               - src: "src/**/*.ts"
                 dest: .
+        - image: coffee51/spots
+          context: spots
+          docker:
+              dockerfile: Dockerfile
+          sync: 
+            manual:
+              - src: "src/**/*.ts"
+                dest: .
+        - image: coffee51/comments
+          context: comments
+          docker:
+              dockerfile: Dockerfile
+          sync: 
+            manual:
+              - src: "src/**/*.ts"
+                dest: .
         - image: coffee51/client
           context: client
           docker:
