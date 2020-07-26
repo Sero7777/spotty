@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: spots-deployment
+  name: comments-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      name: spots
+      name: comments
   template:
     metadata:
       labels:
-        name: spots
+        name: comments
     spec:
       containers:
-        - name: spots
-          image: comments/spots
+        - name: comments
+          image: coffee51/comments
           env:
             - name: NATS_CLIENT_ID
               valueFrom:
@@ -25,7 +25,7 @@ spec:
             - name: NATS_CLUSTER_ID
               value: spotty
             - name: MONGO_URI
-              value: 'mongodb://spots-mongo-service:27017/spots'
+              value: 'mongodb://comments-mongo-service:27017/comments'
             - name: JWT_KEY
               valueFrom:
                 secretKeyRef:
