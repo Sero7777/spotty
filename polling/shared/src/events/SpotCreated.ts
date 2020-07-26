@@ -1,7 +1,7 @@
 import { Topics } from "./topics";
 
 export interface SpotCreatedEvent {
-  subject: Topics.SpotCreated;
+  topic: Topics.SpotCreated;
   data: {
     id: string;
     version: number;

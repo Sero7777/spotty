@@ -1,8 +1,8 @@
-import { Topics } from './topics';
+import { Topics } from "./topics";
 
 export interface SpotUpdatedEvent {
-  subject: Topics.SpotUpdated;
-  data: { 
+  topic: Topics.SpotUpdated;
+  data: {
     id: string;
     version: number;
     title: string;

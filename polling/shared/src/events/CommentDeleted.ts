@@ -1,8 +1,8 @@
-import { Topics } from './topics';
+import { Topics } from "./topics";
 
 export interface CommentDeletedEvent {
-  subject: Topics.CommentDeleted;
-  data: { 
+  topic: Topics.CommentDeleted;
+  data: {
     id: string;
     spot: string;
   };

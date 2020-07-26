@@ -1,7 +1,7 @@
-import { Topics } from './topics';
+import { Topics } from "./topics";
 
 export interface CommentUpdatedEvent {
-  subject: Topics.CommentUpdated;
+  topic: Topics.CommentUpdated;
   data: {
     id: string;
     version: number;
