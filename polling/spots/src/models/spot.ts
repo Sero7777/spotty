@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import {updateIfCurrentPlugin} from "mongoose-update-if-current"
 
 interface SpotFields {
   title: string;
@@ -12,6 +13,7 @@ interface SpotFields {
   latitude: number;
   longitude: number;
   category: string;
+  pic: string
 }
 
 interface SpotDocument extends mongoose.Document {
