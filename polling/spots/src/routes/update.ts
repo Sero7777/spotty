@@ -8,6 +8,8 @@ import {
   requestValidator,
 } from "@spotty/shared";
 import { Uri } from "./uris";
+import { SpotUpdatedPublisher } from "../publisher/SpotUpdatedPublisher";
+import { natsContainer } from "../nats-container";
 
 const updateSpotRouter = express.Router();
 
@@ -89,7 +91,22 @@ updateSpotRouter.put(
 
     await spot.save();
 
-    // publish
+    new SpotUpdatedPublisher(natsContainer.client).publish({
+      id: spot.id,
+      version: spot.version,
+      title: spot.title,
+      pic: spot.pic,
+      username: spot.username,
+      description: spot.description,
+      rating: spot.rating,
+      streetname: spot.streetname,
+      zip: spot.zip,
+      city: spot.city,
+      country: spot.country,
+      category: spot.category,
+      latitude: spot.latitude,
+      longitude: spot.longitude,
+    });
 
     res.send(spot);
   }

@@ -3,6 +3,8 @@ import { body } from "express-validator";
 import { Spot } from "../models/spot";
 import { requestValidator, auth } from "@spotty/shared";
 import { Uri } from "./uris";
+import { SpotCreatedPublisher } from "../publisher/SpotCreatedPublisher";
+import { natsContainer } from "../nats-container";
 
 const createSpotRouter = express.Router();
 
@@ -75,7 +77,22 @@ createSpotRouter.post(
 
     await spot.save();
 
-    // publish event
+    new SpotCreatedPublisher(natsContainer.client).publish({
+      id: spot.id,
+      version: spot.version,
+      title: spot.title,
+      pic: spot.pic,
+      username: spot.username,
+      description: spot.description,
+      rating: spot.rating,
+      streetname: spot.streetname,
+      zip: spot.zip,
+      city: spot.city,
+      country: spot.country,
+      category: spot.category,
+      latitude: spot.latitude,
+      longitude: spot.longitude,
+    });
 
     res.status(201).send(spot);
   }
