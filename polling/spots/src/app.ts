@@ -5,6 +5,7 @@ import cookieSession from "cookie-session";
 import {
   RouteNotFoundException,
   errorHandler as exceptionHandler,
+  getUser
 } from "@spotty/shared";
 
 import {createSpotRouter} from "./routes/create"
@@ -17,6 +18,7 @@ const app = express();
 app.set("trust proxy", true);
 app.use(json());
 app.use(cookieSession({ signed: false, secure: false, httpOnly: false }));
+app.use(getUser)
 
 app.use(createSpotRouter)
 app.use(deleteSpotRouter)
