@@ -5,8 +5,6 @@ export class InvalidRequestException extends OwnException {
 
   constructor(public message: string) {
     super(message);
-
-    Object.setPrototypeOf(this, InvalidRequestException.prototype);
   }
 
   setErrors() {
