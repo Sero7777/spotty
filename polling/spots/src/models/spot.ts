@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import {updateIfCurrentPlugin} from "mongoose-update-if-current"
+import { updateIfCurrentPlugin } from "mongoose-update-if-current";
 
 interface SpotFields {
   title: string;
@@ -13,7 +13,7 @@ interface SpotFields {
   latitude: number;
   longitude: number;
   category: string;
-  pic: string
+  pic: string;
 }
 
 interface SpotDocument extends mongoose.Document {
@@ -86,7 +86,7 @@ const spotSchema = new mongoose.Schema({
   },
 });
 
-spotSchema.set('versionKey', 'version');
+spotSchema.set("versionKey", "version");
 spotSchema.plugin(updateIfCurrentPlugin);
 
 spotSchema.methods.toJSON = function () {
