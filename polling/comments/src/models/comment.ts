@@ -41,8 +41,9 @@ commentSchema.methods.toJSON = function () {
   const comment = this;
   const commentObject = comment.toObject();
   delete commentObject.__v;
-  commentObject.id = commentObject.__id;
-  delete commentObject.__id;
+  commentObject.id = commentObject._id;
+  delete commentObject._id;
+  return commentObject
 };
 
 commentSchema.statics.build = (fields: CommentFields) => {

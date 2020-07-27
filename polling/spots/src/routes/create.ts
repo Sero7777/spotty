@@ -16,7 +16,6 @@ createSpotRouter.post(
       .trim()
       .isLength({ min: 10 })
       .withMessage("Title has to have a minimun length of 10 characters"),
-    body("username").notEmpty().withMessage("A username has to be specified"),
     body("description")
       .trim()
       .isLength({ min: 20 })
@@ -75,7 +74,8 @@ createSpotRouter.post(
       pic,
     });
 
-    await spot.save();
+    const savedSpot = await spot.save();
+    console.log(savedSpot)
 
     new SpotCreatedPublisher(natsContainer.client).publish({
       id: spot.id,

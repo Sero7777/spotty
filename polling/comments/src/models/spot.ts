@@ -93,8 +93,9 @@ spotSchema.methods.toJSON = function () {
   const spot = this;
   const spotObject = spot.toObject();
   delete spotObject.__v;
-  spotObject.id = spotObject.__id;
-  delete spotObject.__id;
+  spotObject.id = spotObject._id;
+  delete spotObject._id;
+  return spotObject
 };
 
 spotSchema.statics.build = (fields: SpotFields) => {
