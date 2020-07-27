@@ -74,8 +74,7 @@ createSpotRouter.post(
       pic,
     });
 
-    const savedSpot = await spot.save();
-    console.log(savedSpot)
+    await spot.save();
 
     new SpotCreatedPublisher(natsContainer.client).publish({
       id: spot.id,

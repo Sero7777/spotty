@@ -26,13 +26,13 @@ deleteSpotRouter.delete(
       throw new UnauthorizedException();
     }
 
-    const deletedSpot = await Spot.deleteOne({ id });
+    await Spot.deleteOne({ _id });
 
     new SpotDeletedPublisher(natsContainer.client).publish({
       id: spot.id,
     });
 
-    res.send(deletedSpot);
+    res.send();
   }
 );
 
