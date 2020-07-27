@@ -15,8 +15,8 @@ deleteSpotRouter.delete(
   Uri.DELETE,
   auth,
   async (req: Request, res: Response) => {
-    const { id } = req.body;
-    const spot = await Spot.findById({ id });
+    const _id = req.body.id;
+    const spot = await Spot.findOne({ _id });
 
     if (!spot) {
       throw new SpotNotFoundException();

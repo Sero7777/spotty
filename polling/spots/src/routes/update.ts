@@ -49,8 +49,7 @@ updateSpotRouter.put(
   ],
   requestValidator,
   async (req: Request, res: Response) => {
-    const { id } = req.body;
-
+    const _id = req.body.id;
     const {
       title,
       description,
@@ -65,7 +64,7 @@ updateSpotRouter.put(
       pic,
     } = req.body;
 
-    const spot = await Spot.findById({ id });
+    const spot = await Spot.findOne({ _id });
 
     if (!spot) {
       throw new SpotNotFoundException();
