@@ -20,7 +20,7 @@ createSpotRouter.post(
   async (req: Request, res: Response) => {
     const { spot, content } = req.body;
 
-    const username = req.user.username;
+    const username = req.user!.username;
 
     const comment = Comment.build({
       spot,

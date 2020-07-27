@@ -58,7 +58,7 @@ createSpotRouter.post(
       pic,
     } = req.body;
 
-    const username = req.user.username;
+    const username = req.user!.username;
 
     const spot = Spot.build({
       title,

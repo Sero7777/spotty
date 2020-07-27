@@ -17,7 +17,7 @@ deleteCommentRouter.delete(Uri.DELETE, auth, async (req: Request, res: Response)
     throw new CommentNotFoundException();
   }
 
-  if (comment.username !== req.user.username) {
+  if (comment.username !== req.user!.username) {
     throw new UnauthorizedException();
   }
 

@@ -22,7 +22,7 @@ deleteSpotRouter.delete(
       throw new SpotNotFoundException();
     }
 
-    if (spot.username !== req.user.username) {
+    if (spot.username !== req.user!.username) {
       throw new UnauthorizedException();
     }
 

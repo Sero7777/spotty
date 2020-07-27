@@ -4,7 +4,7 @@ metadata:
   name: comments-mongo-service
 spec:
   selector:
-    app: comments-mongo
+    name: comments-mongo
   ports:
     - name: mongo-db
       protocol: TCP
