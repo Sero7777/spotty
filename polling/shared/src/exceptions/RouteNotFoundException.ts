@@ -5,6 +5,8 @@ export class RouteNotFoundException extends OwnException {
 
   constructor() {
     super('Route not found');
+
+    Object.setPrototypeOf(this, RouteNotFoundException.prototype);
   }
 
   setErrors() {

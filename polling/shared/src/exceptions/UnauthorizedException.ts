@@ -5,6 +5,8 @@ export class UnauthorizedException extends OwnException {
 
   constructor() {
     super('Unauthorized');
+
+    Object.setPrototypeOf(this, UnauthorizedException.prototype);
   }
 
   setErrors() {

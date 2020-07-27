@@ -5,6 +5,8 @@ export class SpotNotFoundException extends OwnException {
 
   constructor() {
     super('Spot not found');
+
+    Object.setPrototypeOf(this, SpotNotFoundException.prototype);
   }
 
   setErrors() {

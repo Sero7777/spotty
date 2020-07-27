@@ -1,9 +1,11 @@
 export abstract class OwnException extends Error {
-    abstract statusCode: number
+  abstract statusCode: number;
 
-    constructor(message: string) {
-        super(message)
-    }
+  constructor(message: string) {
+    super(message);
 
-    abstract setErrors(): {message: string; field?: string}[]
-} 
+    Object.setPrototypeOf(this, OwnException.prototype);
+  }
+
+  abstract setErrors(): { message: string; field?: string }[];
+}
