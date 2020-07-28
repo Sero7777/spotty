@@ -6,12 +6,15 @@ import {
 } from "@spotty/shared";
 import { Comment } from "../models/comment";
 import { Uri } from "./uris";
+import {CommentDeletedPublisher} from "../publisher/CommentDeletedPublisher"
+import {natsContainer} from "../nats-container"
+
 
 const deleteCommentRouter = express.Router();
 
 deleteCommentRouter.delete(Uri.DELETE, auth, async (req: Request, res: Response) => {
-  const { id } = req.body;
-  const comment = await Comment.findById({ id });
+  const _id = req.body.id;
+  const comment = await Comment.findById({ _id });
 
   if (!comment) {
     throw new CommentNotFoundException();
@@ -21,11 +24,15 @@ deleteCommentRouter.delete(Uri.DELETE, auth, async (req: Request, res: Response)
     throw new UnauthorizedException();
   }
 
-  const deletedSpot = await Comment.deleteOne({ id })
+  const associatedSpotId = comment.spot._id
 
-  // publish event
+  const deletedComment = await Comment.deleteOne({ _id })
 
-  res.send(deletedSpot)
+  new CommentDeletedPublisher(natsContainer.client).publish({
+    id: _id, spot: associatedSpotId
+  })
+
+  res.send(deletedComment)
 });
 
 export { deleteCommentRouter };

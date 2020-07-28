@@ -8,6 +8,8 @@ import {
   requestValidator,
 } from "@spotty/shared";
 import { Uri } from "./uris";
+import {natsContainer} from "../nats-container"
+import {CommentUpdatedPublisher} from "../publisher/CommentUpdatedPublisher"
 
 const updateCommentRouter = express.Router();
 
@@ -15,6 +17,10 @@ updateCommentRouter.put(
   Uri.UPDATE,
   auth,
   [
+    body("id")
+      .trim()
+      .notEmpty()
+      .withMessage("A comment id has to be provided"),
     body("content")
       .trim()
       .notEmpty()
@@ -22,11 +28,11 @@ updateCommentRouter.put(
   ],
   requestValidator,
   async (req: Request, res: Response) => {
-    const { id } = req.body;
+    const _id = req.body.id;
 
     const { content } = req.body;
 
-    const comment = await Comment.findById({ id });
+    const comment = await Comment.findById({ _id });
 
     if (!comment) {
       throw new CommentNotFoundException();
@@ -40,7 +46,9 @@ updateCommentRouter.put(
 
     await comment.save();
 
-    // publish
+    new CommentUpdatedPublisher(natsContainer.client).publish({
+        id: comment._id, version: comment.version, spot: comment.spot._id, content: comment.content
+    })
 
     res.send(comment);
   }
