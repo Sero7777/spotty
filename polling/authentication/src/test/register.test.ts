@@ -1,9 +1,6 @@
 import request from "supertest";
-// const request = require("supertest");
 import { app } from "../app";
 import { Uri } from "../routes/uris";
-
-// TODO:  FIX ALL QUOTATION MARKS
 
 it("returns a 201 on successful registration", async () => {
   return request(app)
