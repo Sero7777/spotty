@@ -1,14 +1,6 @@
 import { MongoMemoryServer } from "mongodb-memory-server";
 import mongoose from "mongoose";
 
-declare global {
-  namespace NodeJS {
-    interface Global {
-      login(): Promise<string[]>;
-    }
-  }
-}
-
 let mongo: any;
 beforeAll(async () => {
   process.env.JWT_SECRET = "Rabarbarkuchensalat123456";
