@@ -36,18 +36,3 @@ afterAll(async () => {
   await mongo.stop();
   await mongoose.connection.close();
 });
-
-global.login = async () => {
-  const response = await request(app)
-    .post(Uri.REGISTER)
-    .send({
-      email: "user@user.com",
-      password: "test1234",
-      username: "user1234",
-    })
-    .expect(201);
-
-  const cookie = response.get("Set-Cookie");
-
-  return cookie;
-};
