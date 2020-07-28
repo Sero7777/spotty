@@ -1,16 +1,16 @@
 import { MongoMemoryServer } from "mongodb-memory-server";
 import mongoose from "mongoose";
-import request from "supertest";
-import { app } from "../app";
-import { Uri } from "../routes/uris";
+import jsonwebtoken from "jsonwebtoken";
 
 declare global {
   namespace NodeJS {
     interface Global {
-      login(): Promise<string[]>;
+      login(): string[];
     }
   }
 }
+
+jest.mock('../nats-container');
 
 let mongo: any;
 beforeAll(async () => {
@@ -25,6 +25,7 @@ beforeAll(async () => {
 });
 
 beforeEach(async () => {
+  jest.clearAllMocks();
   const collections = await mongoose.connection.db.collections();
 
   for (let collection of collections) {
@@ -37,17 +38,18 @@ afterAll(async () => {
   await mongoose.connection.close();
 });
 
-global.login = async () => {
-  const response = await request(app)
-    .post(Uri.REGISTER)
-    .send({
-      email: "user@user.com",
-      password: "test1234",
-      username: "user1234",
-    })
-    .expect(201);
+global.login = () => {
+  const jwt = jsonwebtoken.sign(
+    {
+      id: new mongoose.Types.ObjectId().toHexString(),
+      username: "Otto123",
+    },
+    process.env.JWT_SECRET!
+  );
 
-  const cookie = response.get("Set-Cookie");
+  const session = JSON.stringify({ jwt });
 
-  return cookie;
+  const base64 = Buffer.from(session).toString('base64');
+
+  return [`express:sess=${base64}`];
 };

@@ -9,7 +9,6 @@ import { Uri } from "./uris";
 import {CommentDeletedPublisher} from "../publisher/CommentDeletedPublisher"
 import {natsContainer} from "../nats-container"
 
-
 const deleteCommentRouter = express.Router();
 
 deleteCommentRouter.delete(Uri.DELETE, auth, async (req: Request, res: Response) => {
