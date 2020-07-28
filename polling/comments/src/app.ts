@@ -5,24 +5,26 @@ import cookieSession from "cookie-session";
 import {
   RouteNotFoundException,
   errorHandler as exceptionHandler,
+  getUser
 } from "@spotty/shared";
-import {createSpotRouter} from "./routes/create"
+
+import {createCommentRouter} from "./routes/create"
 import {deleteCommentRouter} from "./routes/delete"
 import {updateCommentRouter} from "./routes/update"
 import {getSingleCommentRouter} from "./routes/getSingle"
-import {getAllCommentsBySpotsRouter} from "./routes/getAll"
-
+import {getAllCommentsRouter} from "./routes/getAll"
 
 const app = express();
 app.set("trust proxy", true);
 app.use(json());
 app.use(cookieSession({ signed: false, secure: false, httpOnly: false }));
+app.use(getUser)
 
-app.use(createSpotRouter)
+app.use(createCommentRouter)
 app.use(deleteCommentRouter)
 app.use(updateCommentRouter)
 app.use(getSingleCommentRouter)
-app.use(getAllCommentsBySpotsRouter)
+app.use(getAllCommentsRouter)
 
 app.all("*", async (req: Request, res: Response) => {
   throw new RouteNotFoundException();

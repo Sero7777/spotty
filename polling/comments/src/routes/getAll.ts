@@ -1,13 +1,17 @@
 import express, { Request, Response } from "express";
 import { Comment } from "../models/comment";
 import { Uri } from "./uris";
+import {auth} from "@spotty/shared"
 
-const getAllCommentsBySpotsRouter = express.Router();
+const getAllCommentsRouter = express.Router();
 
-getAllCommentsBySpotsRouter.get(Uri.READALL, async (req: Request, res: Response) => {
-  const { id } = req.body;
-  const comments = await Comment.find({spot: id});
-  res.send(comments);
-});
+getAllCommentsRouter.get(
+  Uri.READALL,
+  auth, 
+  async (req: Request, res: Response) => {
+    const comments = await Comment.find({})
+    res.send(comments);
+  }
+);
 
-export { getAllCommentsBySpotsRouter };
+export { getAllCommentsRouter };

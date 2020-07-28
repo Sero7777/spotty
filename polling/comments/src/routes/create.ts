@@ -1,16 +1,19 @@
 import express, { Request, Response } from "express";
 import { body } from "express-validator";
 import { Comment } from "../models/comment";
-import { requestValidator, auth } from "@spotty/shared";
+import {Spot } from "../models/spot"
+import { requestValidator, auth, CommentNotFoundException } from "@spotty/shared";
 import { Uri } from "./uris";
+import {CommentCreatedPublisher} from "../publisher/CommentCreatedPublisher"
+import {natsContainer} from "../nats-container"
 
-const createSpotRouter = express.Router();
+const createCommentRouter = express.Router();
 
-createSpotRouter.post(
+createCommentRouter.post(
   Uri.CREATE,
   auth,
   [
-    body("spot").notEmpty().withMessage("A spot id has to be provided"),
+    body("spotId").trim().notEmpty().withMessage("A spot id has to be provided"),
     body("content")
       .trim()
       .notEmpty()
@@ -18,7 +21,14 @@ createSpotRouter.post(
   ],
   requestValidator,
   async (req: Request, res: Response) => {
-    const { spot, content } = req.body;
+    const { spotId, content } = req.body;
+    const _id = spotId
+
+    const spot = await Spot.findById( _id )
+
+    if (!spot){
+        throw new CommentNotFoundException
+    }
 
     const username = req.user!.username;
 
@@ -30,10 +40,12 @@ createSpotRouter.post(
 
     await comment.save();
 
-    // publish event
+    new CommentCreatedPublisher(natsContainer.client).publish({
+        id: comment.id, version: comment.version, spot: spot._id, content: comment.id
+    })
 
     res.status(201).send(comment);
   }
 );
 
-export { createSpotRouter };
+export { createCommentRouter };

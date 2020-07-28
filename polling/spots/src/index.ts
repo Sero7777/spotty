@@ -32,8 +32,6 @@ const initialize = async () => {
     process.on("SIGINT", () => natsContainer.client.close());
     process.on("SIGTERM", () => natsContainer.client.close());
 
-    // Listener hier upsetten
-
     await mongoose.connect(process.env.MONGO_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
