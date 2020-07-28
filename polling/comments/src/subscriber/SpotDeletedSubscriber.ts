@@ -8,18 +8,15 @@ export class SpotDeletedSubscriber extends Subscriber<SpotDeletedEvent> {
   queueGroupName = "queueGroupName";
 
   async onMessage(data: SpotDeletedEvent["data"], msg: Message) {
-    console.log("Received new SpotDeletedEvent: " + data);
 
     const _id = data.id;
-    const spot = await Spot.findById({ _id });
+    const spot = await Spot.findOne({ _id });
 
     if (!spot) throw new Error("spot not found");
 
     await Spot.deleteOne({ _id });
 
     await Comment.deleteMany({ spot });
-
-    console.log("SpotdeletedEvent: ok");
 
     msg.ack();
   }
