@@ -8,6 +8,8 @@ import {
   requestValidator,
 } from "@spotty/shared";
 import { Uri } from "./uris";
+import { SpotUpdatedPublisher } from "../publisher/SpotUpdatedPublisher";
+import { natsContainer } from "../nats-container";
 
 const updateSpotRouter = express.Router();
 
@@ -47,8 +49,7 @@ updateSpotRouter.put(
   ],
   requestValidator,
   async (req: Request, res: Response) => {
-    const { id } = req.body;
-
+    const _id = req.body.id;
     const {
       title,
       description,
@@ -63,13 +64,13 @@ updateSpotRouter.put(
       pic,
     } = req.body;
 
-    const spot = await Spot.findById({ id });
+    const spot = await Spot.findOne({ _id });
 
     if (!spot) {
       throw new SpotNotFoundException();
     }
 
-    if (spot.username !== req.user.username) {
+    if (spot.username !== req.user!.username) {
       throw new UnauthorizedException();
     }
 
@@ -89,7 +90,22 @@ updateSpotRouter.put(
 
     await spot.save();
 
-    // publish
+    new SpotUpdatedPublisher(natsContainer.client).publish({
+      id: spot.id,
+      version: spot.version,
+      title: spot.title,
+      pic: spot.pic,
+      username: spot.username,
+      description: spot.description,
+      rating: spot.rating,
+      streetname: spot.streetname,
+      zip: spot.zip,
+      city: spot.city,
+      country: spot.country,
+      category: spot.category,
+      latitude: spot.latitude,
+      longitude: spot.longitude,
+    });
 
     res.send(spot);
   }

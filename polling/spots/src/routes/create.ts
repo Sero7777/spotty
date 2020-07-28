@@ -3,6 +3,8 @@ import { body } from "express-validator";
 import { Spot } from "../models/spot";
 import { requestValidator, auth } from "@spotty/shared";
 import { Uri } from "./uris";
+import { SpotCreatedPublisher } from "../publisher/SpotCreatedPublisher";
+import { natsContainer } from "../nats-container";
 
 const createSpotRouter = express.Router();
 
@@ -14,7 +16,6 @@ createSpotRouter.post(
       .trim()
       .isLength({ min: 10 })
       .withMessage("Title has to have a minimun length of 10 characters"),
-    body("username").notEmpty().withMessage("A username has to be specified"),
     body("description")
       .trim()
       .isLength({ min: 20 })
@@ -56,7 +57,7 @@ createSpotRouter.post(
       pic,
     } = req.body;
 
-    const username = req.user.username;
+    const username = req.user!.username;
 
     const spot = Spot.build({
       title,
@@ -75,7 +76,22 @@ createSpotRouter.post(
 
     await spot.save();
 
-    // publish event
+    new SpotCreatedPublisher(natsContainer.client).publish({
+      id: spot.id,
+      version: spot.version,
+      title: spot.title,
+      pic: spot.pic,
+      username: spot.username,
+      description: spot.description,
+      rating: spot.rating,
+      streetname: spot.streetname,
+      zip: spot.zip,
+      city: spot.city,
+      country: spot.country,
+      category: spot.category,
+      latitude: spot.latitude,
+      longitude: spot.longitude,
+    });
 
     res.status(201).send(spot);
   }

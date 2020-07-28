@@ -4,7 +4,7 @@ metadata:
   name: spots-mongo-service
 spec:
   selector:
-    app: spots-mongo
+    name: spots-mongo
   ports:
     - name: mongo-db
       protocol: TCP

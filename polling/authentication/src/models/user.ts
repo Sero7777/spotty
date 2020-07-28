@@ -39,8 +39,9 @@ userSchema.methods.toJSON = function() {
     const userObject = user.toObject()
     delete userObject.password
     delete userObject.__v
-    userObject.id = userObject.__id
-    delete userObject.__id
+    userObject.id = userObject._id
+    delete userObject._id
+    return userObject
 }
 
 userSchema.statics.build = (fields: UserFields) => {

@@ -24,10 +24,10 @@ spec:
               value: 'http://nats-service:4222'
             - name: NATS_CLUSTER_ID
               value: spotty
-            - name: MONGO_URI
+            - name: MONGO_URL
               value: 'mongodb://comments-mongo-service:27017/comments'
-            - name: JWT_KEY
+            - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:
                   name: jwt-secret
-                  key: JWT_KEY
+                  key: JWT_SECRET
