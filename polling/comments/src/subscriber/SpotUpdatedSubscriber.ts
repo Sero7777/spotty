@@ -7,6 +7,8 @@ export class SpotUpdatedSubscriber extends Subscriber<SpotUpdatedEvent> {
   queueGroupName = "queueGroupName";
 
   async onMessage(data: SpotUpdatedEvent["data"], msg: Message) {
+    console.log("Received new SpotUpdatedEvent: " + data);
+
     const _id = data.id;
     const spot = await Spot.findById({ _id });
 
@@ -15,6 +17,8 @@ export class SpotUpdatedSubscriber extends Subscriber<SpotUpdatedEvent> {
     spot.set(data);
 
     await spot.save();
+
+    console.log("SpotUpdatedEvent: ok");
 
     msg.ack();
   }

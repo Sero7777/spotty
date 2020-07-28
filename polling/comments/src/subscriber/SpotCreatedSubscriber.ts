@@ -7,9 +7,12 @@ export class SpotCreatedSubscriber extends Subscriber<SpotCreatedEvent> {
   queueGroupName = "queueGroupName";
 
   async onMessage(data: SpotCreatedEvent["data"], msg: Message) {
+    console.log("Received new SpotCreatedEvent: " + data);
     const spot = Spot.build(data);
 
     await spot.save();
+
+    console.log("SpotCreatedEvent: ok");
 
     msg.ack();
   }

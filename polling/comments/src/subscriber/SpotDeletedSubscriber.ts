@@ -8,6 +8,8 @@ export class SpotDeletedSubscriber extends Subscriber<SpotDeletedEvent> {
   queueGroupName = "queueGroupName";
 
   async onMessage(data: SpotDeletedEvent["data"], msg: Message) {
+    console.log("Received new SpotDeletedEvent: " + data);
+
     const _id = data.id;
     const spot = await Spot.findById({ _id });
 
@@ -16,6 +18,8 @@ export class SpotDeletedSubscriber extends Subscriber<SpotDeletedEvent> {
     await Spot.deleteOne({ _id });
 
     await Comment.deleteMany({ spot });
+
+    console.log("SpotdeletedEvent: ok");
 
     msg.ack();
   }
