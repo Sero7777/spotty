@@ -1,6 +1,9 @@
 import { app } from "./app";
 import mongoose from "mongoose";
 import { natsContainer } from "./nats-container";
+import { SpotCreatedSubscriber } from "./subscriber/SpotCreatedSubscriber";
+import { SpotUpdatedSubscriber } from "./subscriber/SpotUpdatedSubscriber";
+import { SpotDeletedSubscriber } from "./subscriber/SpotDeletedSubscriber";
 
 const initialize = async () => {
   if (!process.env.JWT_SECRET) {
@@ -32,7 +35,9 @@ const initialize = async () => {
     process.on("SIGINT", () => natsContainer.client.close());
     process.on("SIGTERM", () => natsContainer.client.close());
 
-    // Listener hier upsetten
+    new SpotCreatedSubscriber(natsContainer.client).listen();
+    new SpotUpdatedSubscriber(natsContainer.client).listen();
+    new SpotDeletedSubscriber(natsContainer.client).listen();
 
     await mongoose.connect(process.env.MONGO_URL, {
       useNewUrlParser: true,

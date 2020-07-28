@@ -2,7 +2,7 @@ import { Message } from "node-nats-streaming";
 import { Subscriber, SpotUpdatedEvent, Topics } from "@spotty/shared";
 import { Spot } from "../models/spot";
 
-export class SpotCreatedSubscriber extends Subscriber<SpotUpdatedEvent> {
+export class SpotUpdatedSubscriber extends Subscriber<SpotUpdatedEvent> {
   topic: Topics.SpotUpdated = Topics.SpotUpdated;
   queueGroupName = "queueGroupName";
 

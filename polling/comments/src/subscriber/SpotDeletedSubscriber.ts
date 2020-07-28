@@ -3,7 +3,7 @@ import { Subscriber, SpotDeletedEvent, Topics } from "@spotty/shared";
 import { Spot } from "../models/spot";
 import { Comment } from "../models/comment";
 
-export class SpotCreatedSubscriber extends Subscriber<SpotDeletedEvent> {
+export class SpotDeletedSubscriber extends Subscriber<SpotDeletedEvent> {
   topic: Topics.SpotDeleted = Topics.SpotDeleted;
   queueGroupName = "queueGroupName";
 
