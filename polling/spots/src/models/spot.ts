@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { updateIfCurrentPlugin } from "mongoose-update-if-current";
 
 interface SpotFields {
   title: string;
@@ -84,8 +83,6 @@ const spotSchema = new mongoose.Schema({
     type: String,
   },
 });
-
-spotSchema.plugin(updateIfCurrentPlugin);
 
 spotSchema.methods.toJSON = function () {
   const spot = this;

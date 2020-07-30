@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { updateIfCurrentPlugin } from "mongoose-update-if-current";
 
 interface CommentFields {
     username: string;
@@ -25,8 +24,6 @@ const commentSchema = new mongoose.Schema({
     required: true,
   },
 });
-
-commentSchema.plugin(updateIfCurrentPlugin);
 
 commentSchema.methods.toJSON = function () {
   const comment = this;

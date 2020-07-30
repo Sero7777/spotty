@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { updateIfCurrentPlugin } from "mongoose-update-if-current";
 import {CommentDocument} from "./comment"
 
 interface SpotFields {
@@ -91,9 +90,6 @@ const spotSchema = new mongoose.Schema({
       ref: "Comment"
   }]
 });
-
-spotSchema.set("versionKey", "version");
-spotSchema.plugin(updateIfCurrentPlugin);
 
 spotSchema.methods.toJSON = function () {
   const spot = this;

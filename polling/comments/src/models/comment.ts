@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { updateIfCurrentPlugin } from "mongoose-update-if-current";
 import { SpotDocument } from "./spot";
 
 interface CommentFields {
@@ -32,8 +31,6 @@ const commentSchema = new mongoose.Schema({
     ref: "Spot",
   },
 });
-
-commentSchema.plugin(updateIfCurrentPlugin);
 
 commentSchema.methods.toJSON = function () {
   const comment = this;
