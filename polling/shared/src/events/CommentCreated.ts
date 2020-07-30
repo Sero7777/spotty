@@ -7,5 +7,6 @@ export interface CommentCreatedEvent {
     version: number;
     spot: string;
     content: string;
+    username: string;
   };
 }
