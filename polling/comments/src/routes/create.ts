@@ -41,7 +41,7 @@ createCommentRouter.post(
     await comment.save();
 
     new CommentCreatedPublisher(natsContainer.client).publish({
-        id: comment.id, version: comment.version, spot: spot._id, content: comment.id
+        id: comment.id, spot: spot._id, content: comment.id
     })
 
     res.status(201).send(comment);
