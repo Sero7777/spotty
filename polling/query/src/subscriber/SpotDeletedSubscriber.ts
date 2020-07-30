@@ -4,7 +4,7 @@ import { Spot } from "../models/spot";
 
 export class SpotDeletedSubscriber extends Subscriber<SpotDeletedEvent> {
   topic: Topics.SpotDeleted = Topics.SpotDeleted;
-  queueGroupName = "queueGroupName";
+  queueGroupName = "Query";
 
   async onMessage(data: SpotDeletedEvent["data"], msg: Message) {
 

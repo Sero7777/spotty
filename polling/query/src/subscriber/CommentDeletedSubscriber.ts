@@ -5,7 +5,7 @@ import { SpotNotFoundException } from "@spotty/shared";
 
 export class CommentDeletedSubscriber extends Subscriber<CommentDeletedEvent> {
   topic: Topics.CommentDeleted = Topics.CommentDeleted;
-  queueGroupName = "queueGroupName";
+  queueGroupName = "Query";
 
   async onMessage(data: CommentDeletedEvent["data"], msg: Message) {
     const { id, spot } = data;

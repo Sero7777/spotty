@@ -29,7 +29,6 @@ export interface SpotDocument extends mongoose.Document {
   latitude: number;
   longitude: number;
   category: string;
-  version: number;
 }
 
 interface SpotModel extends mongoose.Model<SpotDocument> {
@@ -86,7 +85,6 @@ const spotSchema = new mongoose.Schema({
   },
 });
 
-spotSchema.set("versionKey", "version");
 spotSchema.plugin(updateIfCurrentPlugin);
 
 spotSchema.methods.toJSON = function () {

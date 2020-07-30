@@ -4,7 +4,7 @@ import { Spot } from "../models/spot";
 
 export class SpotUpdatedSubscriber extends Subscriber<SpotUpdatedEvent> {
   topic: Topics.SpotUpdated = Topics.SpotUpdated;
-  queueGroupName = "queueGroupName";
+  queueGroupName = "Query";
 
   async onMessage(data: SpotUpdatedEvent["data"], msg: Message) {
 
@@ -14,7 +14,6 @@ export class SpotUpdatedSubscriber extends Subscriber<SpotUpdatedEvent> {
     if (!spot) throw new Error("spot not found");
 
     spot.set(data);
-    spot.set({ version: data.version - 1 });
 
     console.log(JSON.stringify(spot));
 

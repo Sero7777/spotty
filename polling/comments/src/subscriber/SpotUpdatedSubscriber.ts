@@ -14,7 +14,6 @@ export class SpotUpdatedSubscriber extends Subscriber<SpotUpdatedEvent> {
     if (!spot) throw new Error("spot not found");
 
     spot.set(data);
-    spot.set({ version: data.version - 1 });
 
     console.log(JSON.stringify(spot));
 

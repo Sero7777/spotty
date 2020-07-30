@@ -4,7 +4,6 @@ export interface SpotUpdatedEvent {
   topic: Topics.SpotUpdated;
   data: {
     id: string;
-    version: number;
     title: string;
     pic: string;
     username: string;

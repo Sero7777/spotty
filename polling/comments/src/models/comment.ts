@@ -12,7 +12,6 @@ interface CommentDocument extends mongoose.Document {
   username: string;
   spot: SpotDocument;
   content: string;
-  version: number;
 }
 
 interface CommentModel extends mongoose.Model<CommentDocument> {
@@ -34,7 +33,6 @@ const commentSchema = new mongoose.Schema({
   },
 });
 
-commentSchema.set("versionKey", "version");
 commentSchema.plugin(updateIfCurrentPlugin);
 
 commentSchema.methods.toJSON = function () {

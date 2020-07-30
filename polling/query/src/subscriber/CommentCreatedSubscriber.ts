@@ -6,7 +6,7 @@ import { SpotNotFoundException } from "@spotty/shared";
 
 export class CommentCreatedSubscriber extends Subscriber<CommentCreatedEvent> {
   topic: Topics.CommentCreated = Topics.CommentCreated;
-  queueGroupName = "queueGroupName";
+  queueGroupName = "Query";
 
   async onMessage(data: CommentCreatedEvent["data"], msg: Message) {
     const { id, spot, content, username } = data;

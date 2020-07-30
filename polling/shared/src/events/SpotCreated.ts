@@ -4,7 +4,6 @@ export interface SpotCreatedEvent {
   topic: Topics.SpotCreated;
   data: {
     id: string;
-    version: number;
     title: string;
     pic: string;
     username: string;
