@@ -16,9 +16,12 @@ export class CommentDeletedSubscriber extends Subscriber<CommentDeletedEvent> {
       throw new SpotNotFoundException();
     }
 
-    spotFromDb.comments.filter(comment => comment._id !== id)
-
-    await spotFromDb.save();
+    const index = spotFromDb.comments.findIndex((x) => x._id == id);
+    if (index != -1) {
+      spotFromDb.comments.splice(index, 1);
+      spotFromDb.markModified("comments");
+      await spotFromDb.save();
+    }
 
     msg.ack();
   }

@@ -16,20 +16,12 @@ export class CommentUpdatedSubscriber extends Subscriber<CommentUpdatedEvent> {
       throw new SpotNotFoundException();
     }
 
-    // check if item has same id as updated comment and if so, change the content
-    // spotFromDb.comments.forEach(function(comment) {
-    //     if (comment._id = id)
-    //     comment.content = content
-    // })
-
-
-
-    const index = spotFromDb.comments.findIndex(x => x._id == id)
-    spotFromDb.comments[index].content = content
-
-    console.log(spotFromDb)
-
-    await spotFromDb.save();
+    const index = spotFromDb.comments.findIndex((x) => x._id == id);
+    if (index != -1) {
+      spotFromDb.comments[index].content = content;
+      spotFromDb.markModified("comments");
+      await spotFromDb.save();
+    }
 
     msg.ack();
   }
