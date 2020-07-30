@@ -1,16 +1,13 @@
 import mongoose from "mongoose";
-import { SpotDocument } from "./spot";
 
 interface CommentFields {
-  username: string;
-  spot: SpotDocument;
-  content: string;
+    username: string;
+    content: string;
 }
 
-interface CommentDocument extends mongoose.Document {
-  username: string;
-  spot: SpotDocument;
-  content: string;
+export interface CommentDocument extends mongoose.Document {
+    username: string;
+    content: string;
 }
 
 interface CommentModel extends mongoose.Model<CommentDocument> {
@@ -26,10 +23,6 @@ const commentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  spot: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Spot",
-  },
 });
 
 commentSchema.methods.toJSON = function () {
@@ -38,7 +31,7 @@ commentSchema.methods.toJSON = function () {
   delete commentObject.__v;
   commentObject.id = commentObject._id;
   delete commentObject._id;
-  return commentObject
+  return commentObject;
 };
 
 commentSchema.statics.build = (fields: CommentFields) => {

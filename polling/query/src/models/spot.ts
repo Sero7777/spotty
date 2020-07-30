@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import {CommentDocument} from "./comment"
 
 interface SpotFields {
   title: string;
@@ -15,7 +16,7 @@ interface SpotFields {
   pic: string;
 }
 
-interface SpotDocument extends mongoose.Document {
+export interface SpotDocument extends mongoose.Document {
   title: string;
   pic: string;
   username: string;
@@ -28,6 +29,8 @@ interface SpotDocument extends mongoose.Document {
   latitude: number;
   longitude: number;
   category: string;
+  version: number;
+  comments: CommentDocument[];
 }
 
 interface SpotModel extends mongoose.Model<SpotDocument> {
@@ -82,6 +85,10 @@ const spotSchema = new mongoose.Schema({
   pic: {
     type: String,
   },
+  comments: [{
+      type: Object,
+      ref: "Comment"
+  }]
 });
 
 spotSchema.methods.toJSON = function () {
@@ -90,7 +97,7 @@ spotSchema.methods.toJSON = function () {
   delete spotObject.__v;
   spotObject.id = spotObject._id;
   delete spotObject._id;
-  return spotObject
+  return spotObject;
 };
 
 spotSchema.statics.build = (fields: SpotFields) => {

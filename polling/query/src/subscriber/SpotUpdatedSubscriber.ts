@@ -4,7 +4,7 @@ import { Spot } from "../models/spot";
 
 export class SpotUpdatedSubscriber extends Subscriber<SpotUpdatedEvent> {
   topic: Topics.SpotUpdated = Topics.SpotUpdated;
-  queueGroupName = "queueGroupName";
+  queueGroupName = "Query";
 
   async onMessage(data: SpotUpdatedEvent["data"], msg: Message) {
 

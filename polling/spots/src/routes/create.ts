@@ -78,7 +78,6 @@ createSpotRouter.post(
 
     new SpotCreatedPublisher(natsContainer.client).publish({
       id: spot.id,
-      version: spot.version,
       title: spot.title,
       pic: spot.pic,
       username: spot.username,
