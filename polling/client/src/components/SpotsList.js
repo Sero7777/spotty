@@ -1,6 +1,6 @@
 import React from "react";
 
-const SpotsList = ({props}) => {
+const SpotsList = (props) => {
     return (
         <div className="spots__list">
             {props.children}

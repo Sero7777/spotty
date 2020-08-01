@@ -10,7 +10,7 @@ const PublicRoute = ({ component: Component, ...rest }) => {
             rest.loggedIn ? (
                 <Redirect
                     to={{
-                        pathname: "/impressum",
+                        pathname: "/profile",
                         state: { from: props.location }
                     }}
                 />
