@@ -8,7 +8,7 @@ const ListView = (props) => {
     const spotsList = props.spots.map(spot => {
         return (
             <li key={spot.id}>
-                <SpotItem imgUrl={spot.pic} author={spot.username} caption={spot.title} description={spot.description} rating={spot.rating} />
+                <SpotItem imgUrl={spot.pic} author={spot.username} caption={spot.title} description={spot.description} rating={spot.rating} spotId={spot.id}/>
             </li>
         )
     })

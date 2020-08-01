@@ -527,3 +527,65 @@ a {
   .spots__add__modal__textarea--stretch {
     width: 100%;
     height: 10rem; }
+
+.spotModal__container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  font-size: 1.25rem; }
+
+.spotModal__pic {
+  height: 20vh;
+  width: 100%;
+  object-fit: cover;
+  border-bottom: var(--line); }
+
+.spotModal__description {
+  border-bottom: var(--line); }
+
+.spotModal__category-upvotes {
+  display: flex;
+  border-bottom: var(--line); }
+  .spotModal__category-upvotes--category {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    border-right: var(--line); }
+  .spotModal__category-upvotes--upvotes {
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+
+.spotModal__adress-username {
+  display: flex;
+  border-bottom: var(--line); }
+  .spotModal__adress-username--adress {
+    width: 60%;
+    border-right: var(--line); }
+  .spotModal__adress-username--username {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40%; }
+    .spotModal__adress-username--username--createdBy {
+      font-style: italic; }
+
+.comment__container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  background-color: var(--color-grey-light-3);
+  border: 1px solid black; }
+
+.comment__username {
+  align-self: center;
+  padding: .5rem; }
+  .comment__username span {
+    font-weight: bold; }
+
+.comment__content {
+  border-top: var(--line-white);
+  padding: 1rem; }

@@ -1,0 +1,23 @@
+.comment {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    background-color: var(--color-grey-light-3);
+    border: 1px solid black;
+  }
+
+  &__username {
+    align-self: center;
+    padding: .5rem;
+
+    & span {
+        font-weight: bold;;
+    }
+  }
+
+  &__content {
+    border-top: var(--line-white);
+    padding: 1rem;
+  } 
+}

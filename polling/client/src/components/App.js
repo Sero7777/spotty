@@ -11,6 +11,7 @@ import PrivateRoute from "./PrivateRoute"
 import PublicRoute from "./PublicRoute"
 import Profile from "./Profile/Profile"
 import ListView from "./ListView"
+import Test from "./Test"
 
 const App = (props) => {
 
@@ -41,6 +42,8 @@ const App = (props) => {
                 <Route exact path="/">
                     <Redirect to="/register" />
                 </Route> */}
+
+                <Route exact path="/test" component={Test} />
 
                 <Route exact path="/list" component={ListView} />
             </div>
