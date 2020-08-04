@@ -8,7 +8,7 @@ export interface SpotUpdatedEvent {
     pic: string;
     username: string;
     description: string;
-    rating: number;
+    upvotes: number;
     streetname: string;
     zip: string;
     city: string;
