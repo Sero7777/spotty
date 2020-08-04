@@ -48,3 +48,5 @@ build:
             manual:
               - src: '**/*.js'
                 dest: .
+              - src: "**/*.css"
+                dest: .

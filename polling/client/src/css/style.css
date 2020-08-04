@@ -40,6 +40,9 @@ a {
   text-decoration: none;
   color: black; }
 
+li {
+  list-style: none; }
+
 .container {
   display: flex;
   flex-direction: column;
@@ -107,7 +110,7 @@ a {
 .pd-top-xl {
   padding-top: 8rem; }
 
-.pd-top-xs {
+.pd-bottom-xs {
   padding-bottom: 1rem; }
 
 .pd-bottom-s {
@@ -384,21 +387,31 @@ a {
   border: var(--line-white);
   margin-bottom: 2rem;
   height: 20vh;
-  background-color: var(--color-grey-light-3); }
+  background-color: var(--color-grey-light-3);
+  cursor: pointer; }
   .spots__content__item-pic {
     grid-column: 1 / span 3;
     grid-row: 1 / span 8;
     object-fit: cover;
     height: 100%;
     border: var(--line-white); }
-  .spots__content__item-author {
+  .spots__content__item--user-actions {
     grid-column: 1 / span 3;
     grid-row: 9 / span 2;
     font-size: 1.5rem;
     border: var(--line-white);
     padding: 1rem 1rem;
     display: flex;
-    align-items: center; }
+    align-items: center;
+    justify-content: space-around;
+    cursor: default; }
+    .spots__content__item--user-actions button {
+      border: none;
+      outline: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer; }
+    .spots__content__item--user-actions button:hover {
+      background-color: var(--color-grey-light-1); }
   .spots__content__item-caption {
     grid-column: 4 / span 5;
     grid-row: 1 / span 3;
@@ -460,6 +473,20 @@ a {
   display: flex;
   flex-direction: column;
   background: white; }
+  .modal--comments {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50vh;
+    max-width: 100%;
+    height: 70vh;
+    max-height: 100%;
+    z-index: 2050;
+    cursor: default;
+    display: flex;
+    flex-direction: column;
+    background: white; }
   .modal__overlay {
     position: fixed;
     top: 0;
@@ -470,8 +497,20 @@ a {
     background: rgba(0, 0, 0, 0.8);
     cursor: pointer;
     animation: show;
-    animation-duration: .5s;
+    animation-duration: 0.5s;
     transition: all 0.3s ease-in; }
+    .modal__overlay--comments {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2000;
+      background: rgba(0, 0, 0, 0.8);
+      cursor: pointer;
+      animation: show;
+      animation-duration: 0.5s;
+      transition: all 0.3s ease-in; }
   .modal__header {
     background-color: lightgray;
     display: flex;
@@ -533,16 +572,19 @@ a {
   flex-direction: column;
   width: 100%;
   height: 100%;
-  font-size: 1.25rem; }
+  font-size: 1.5rem; }
 
 .spotModal__pic {
   height: 20vh;
   width: 100%;
-  object-fit: cover;
   border-bottom: var(--line); }
+  .spotModal__pic img {
+    height: 100%;
+    width: 100%; }
 
 .spotModal__description {
-  border-bottom: var(--line); }
+  border-bottom: var(--line);
+  font-size: 1.25rem; }
 
 .spotModal__category-upvotes {
   display: flex;
@@ -576,16 +618,80 @@ a {
 .comment__container {
   display: flex;
   flex-direction: column;
-  margin-bottom: 1rem;
   background-color: var(--color-grey-light-3);
-  border: 1px solid black; }
+  border: 1px solid var(--color-grey-light-4); }
 
 .comment__username {
-  align-self: center;
-  padding: .5rem; }
-  .comment__username span {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem; }
+  .comment__username div span {
     font-weight: bold; }
 
 .comment__content {
   border-top: var(--line-white);
   padding: 1rem; }
+
+.comment__input {
+  width: 100%;
+  height: 5vh; }
+  .comment__input form {
+    width: 100%;
+    height: 100%;
+    display: flex; }
+    .comment__input form textarea {
+      width: 90%; }
+    .comment__input form button {
+      width: 10%; }
+
+.comment--user-actions {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; }
+  .comment--user-actions button {
+    border: none;
+    outline: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer; }
+  .comment--user-actions button:hover {
+    background-color: var(--color-grey-light-1); }
+
+.deleteModal__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+.deleteModal__text {
+  font-size: 2rem;
+  font-weight: bold; }
+
+.deleteModal__btns {
+  display: flex;
+  justify-content: space-around;
+  width: 80%; }
+  .deleteModal__btns button {
+    width: 30%; }
+
+.updateCommentModal__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem; }
+
+.updateCommentModal__comment {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: var(--color-grey-light-3);
+  border: 1px solid var(--color-grey-light-4); }
+  .updateCommentModal__comment--username {
+    padding: 0.5rem; }
+    .updateCommentModal__comment--username span {
+      font-weight: bold; }
+  .updateCommentModal__comment--content {
+    border-top: var(--line-white);
+    padding: 1rem; }

@@ -12,6 +12,8 @@
 
   background-color: var(--color-grey-light-3);
 
+  cursor: pointer;
+
   &-pic {
     grid-column: 1 / span 3;
     grid-row: 1 / span 8;
@@ -22,7 +24,7 @@
     border: var(--line-white);
   }
 
-  &-author {
+  &--user-actions {
     grid-column: 1 / span 3;
     grid-row: 9 / span 2;
 
@@ -33,6 +35,20 @@
 
     display: flex;
     align-items: center;
+    justify-content: space-around;
+
+    cursor: default;
+
+    & button {
+        border: none;
+        outline: none;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+    }
+
+    & button:hover {
+        background-color: var(--color-grey-light-1);
+    }
   }
 
   &-caption {

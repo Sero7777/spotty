@@ -1,14 +1,13 @@
-import React from "react"
+import React, {useState} from "react"
 import SpotsList from "./SpotsList"
 import SpotItem from "./SpotItem"
 import { connect } from 'react-redux';
 
 const ListView = (props) => {
-
     const spotsList = props.spots.map(spot => {
         return (
             <li key={spot.id}>
-                <SpotItem imgUrl={spot.pic} author={spot.username} caption={spot.title} description={spot.description} rating={spot.rating} spotId={spot.id}/>
+                <SpotItem spot={spot} username={props.username}/>
             </li>
         )
     })
@@ -23,7 +22,7 @@ const ListView = (props) => {
 }
 
 const mapStateToProps = state => {
-    return { spots: state.spots };
+    return { spots: state.spots, username: state.user.username };
 };
 
 export default connect(

@@ -62,17 +62,26 @@ export const createSpot = async formValues => {
 }
 
 export const updateSpot = async formValues => {
-    const response = await spotRequest.put("/update", { ...formValues }, { withCredentials: true })
-    console.log("Updating a spot ...")
+    try {
+        const response = await spotRequest.put("/update", { ...formValues }, { withCredentials: true })
+        console.log("Updating a spot ...")
+        return response.status
 
-    return response.status
+    } catch (error) {
+        console.log(error.response)
+        return error.response.data.status
+    }
 }
 
 export const deleteSpot = async formValues => {
-    const response = await spotRequest.delete("/delete", { ...formValues }, { withCredentials: true })
-    console.log("Deleting a spot ...")
-
-    return response.status
+    try {
+        const response = await spotRequest.delete("/delete", { data: { ...formValues } }, { withCredentials: true })
+        console.log("Deleting a spot ...")
+        return response.status
+    } catch (error) {
+        console.log(error.response)
+        return error.response.data.status
+    }
 }
 
 export const createComment = async formValues => {
@@ -90,7 +99,7 @@ export const updateComment = async formValues => {
 }
 
 export const deleteComment = async formValues => {
-    const response = await commentRequest.delete("/delete", { ...formValues }, { withCredentials: true })
+    const response = await commentRequest.delete("/delete", { data: { ...formValues } }, { withCredentials: true })
     console.log("Deleting a spot ...")
 
     return response.status

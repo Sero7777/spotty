@@ -27,7 +27,7 @@ const ActionBar = (props) => {
     return (
         <div className="header__loggedIn mg-right-xl">
             <ActionItem itemText="Add" clickAction={() => { setAddModalTriggered(true) }} />
-            <Link to="/list" className="header__loggedIn__item"><ActionItem itemText="List" /></Link>
+            <Link to="/list" className="header__loggedIn__item">List</Link>
             <div className="header__loggedIn__username header__loggedIn__item pd-left-l pd-right-l">{props.username}</div>
 
             <button onClick={onLogout} className="header__logout-button mg-left-s pd-left-xs pd-right-xs">Logout</button>
