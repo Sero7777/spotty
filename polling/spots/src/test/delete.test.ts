@@ -11,7 +11,7 @@ it("returns 200 if deletion was sucessful", async () => {
       title: "This is a test title",
       description:
         "This is a test description. I hope this will work out well.",
-      rating: 5,
+      upvotes: 5,
       streetname: "teststreet",
       zip: "testZip",
       city: "testCity",
@@ -39,7 +39,7 @@ it("deletes the spot", async () => {
       title: "This is a test title",
       description:
         "This is a test description. I hope this will work out well.",
-      rating: 5,
+      upvotes: 5,
       streetname: "teststreet",
       zip: "testZip",
       city: "testCity",
@@ -73,7 +73,7 @@ it("returns a 404 if spot doesnt exist", async () => {
       title: "This is a test title",
       description:
         "This is a test description. I hope this will work out well.",
-      rating: 5,
+      upvotes: 5,
       streetname: "teststreet",
       zip: "testZip",
       city: "testCity",
@@ -101,7 +101,7 @@ it("returns a 401 if unauthorized", async () => {
       title: "This is a test title",
       description:
         "This is a test description. I hope this will work out well.",
-      rating: 5,
+      upvotes: 5,
       streetname: "teststreet",
       zip: "testZip",
       city: "testCity",

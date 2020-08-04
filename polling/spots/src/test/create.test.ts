@@ -23,7 +23,7 @@ it("returns 400 if invalid title", async () => {
       title: "tooshort",
       description:
         "This is a test description. I hope this will work out well.",
-      rating: 5,
+      upvotes: 5,
       streetname: "teststreet",
       zip: "testZip",
       city: "testCity",
@@ -41,7 +41,7 @@ it("returns 400 if invalid title", async () => {
     .send({
       description:
         "This is a test description. I hope this will work out well.",
-      rating: 5,
+      upvotes: 5,
       streetname: "teststreet",
       zip: "testZip",
       city: "testCity",
@@ -61,7 +61,7 @@ it("returns 400 if invalid description", async () => {
     .send({
       title: "This is a test title",
       description: "tooshort",
-      rating: 5,
+      upvotes: 5,
       streetname: "teststreet",
       zip: "testZip",
       city: "testCity",
@@ -78,65 +78,7 @@ it("returns 400 if invalid description", async () => {
     .set("Cookie", global.login())
     .send({
       title: "This is a test title",
-      rating: 5,
-      streetname: "teststreet",
-      zip: "testZip",
-      city: "testCity",
-      country: "testCountry",
-      category: "testCategory",
-      latitude: 75.423423,
-      longitude: 78.2342134,
-      pic: "",
-    })
-    .expect(400);
-});
-
-it("returns 400 if invalid rating", async () => {
-  await request(app)
-    .post(Uri.CREATE)
-    .set("Cookie", global.login())
-    .send({
-      title: "This is a test title",
-      description:
-        "This is a test description. I hope this will work out well.",
-      rating: 6,
-      streetname: "teststreet",
-      zip: "testZip",
-      city: "testCity",
-      country: "testCountry",
-      category: "testCategory",
-      latitude: 75.423423,
-      longitude: 78.2342134,
-      pic: "",
-    })
-    .expect(400);
-
-  await request(app)
-    .post(Uri.CREATE)
-    .set("Cookie", global.login())
-    .send({
-      title: "This is a test title",
-      description:
-        "This is a test description. I hope this will work out well.",
-      rating: 0,
-      streetname: "teststreet",
-      zip: "testZip",
-      city: "testCity",
-      country: "testCountry",
-      category: "testCategory",
-      latitude: 75.423423,
-      longitude: 78.2342134,
-      pic: "",
-    })
-    .expect(400);
-
-  await request(app)
-    .post(Uri.CREATE)
-    .set("Cookie", global.login())
-    .send({
-      title: "This is a test title",
-      description:
-        "This is a test description. I hope this will work out well.",
+      upvotes: 5,
       streetname: "teststreet",
       zip: "testZip",
       city: "testCity",
@@ -157,7 +99,7 @@ it("returns 400 if invalid lat", async () => {
       title: "This is a test title",
       description:
         "This is a test description. I hope this will work out well.",
-      rating: 5,
+      upvotes: 5,
       streetname: "teststreet",
       zip: "testZip",
       city: "testCity",
@@ -176,7 +118,7 @@ it("returns 400 if invalid lat", async () => {
       title: "This is a test title",
       description:
         "This is a test description. I hope this will work out well.",
-      rating: 5,
+      upvotes: 5,
       streetname: "teststreet",
       zip: "testZip",
       city: "testCity",
@@ -195,7 +137,7 @@ it("returns 400 if invalid lat", async () => {
       title: "This is a test title",
       description:
         "This is a test description. I hope this will work out well.",
-      rating: 5,
+      upvotes: 5,
       streetname: "teststreet",
       zip: "testZip",
       city: "testCity",
@@ -215,7 +157,7 @@ it("returns 400 if invalid long", async () => {
       title: "This is a test title",
       description:
         "This is a test description. I hope this will work out well.",
-      rating: 5,
+      upvotes: 5,
       streetname: "teststreet",
       zip: "testZip",
       city: "testCity",
@@ -234,7 +176,7 @@ it("returns 400 if invalid long", async () => {
       title: "This is a test title",
       description:
         "This is a test description. I hope this will work out well.",
-      rating: 5,
+      upvotes: 5,
       streetname: "teststreet",
       zip: "testZip",
       city: "testCity",
@@ -253,7 +195,7 @@ it("returns 400 if invalid long", async () => {
       title: "This is a test title",
       description:
         "This is a test description. I hope this will work out well.",
-      rating: 5,
+      upvotes: 5,
       streetname: "teststreet",
       zip: "testZip",
       city: "testCity",
@@ -273,7 +215,7 @@ it("returns 400 if no streetname", async () => {
       title: "This is a test title",
       description:
         "This is a test description. I hope this will work out well.",
-      rating: 5,
+      upvotes: 5,
       zip: "testZip",
       city: "testCity",
       country: "testCountry",
@@ -293,7 +235,7 @@ it("returns 400 if no zip", async () => {
       title: "This is a test title",
       description:
         "This is a test description. I hope this will work out well.",
-      rating: 5,
+      upvotes: 5,
       streetname: "teststreet",
       city: "testCity",
       country: "testCountry",
@@ -313,7 +255,7 @@ it("returns 400 if no city", async () => {
       title: "This is a test title",
       description:
         "This is a test description. I hope this will work out well.",
-      rating: 5,
+      upvotes: 5,
       streetname: "teststreet",
       zip: "testZip",
       country: "testCountry",
@@ -333,7 +275,7 @@ it("returns 400 if no country", async () => {
       title: "This is a test title",
       description:
         "This is a test description. I hope this will work out well.",
-      rating: 5,
+      upvotes: 5,
       streetname: "teststreet",
       zip: "testZip",
       city: "testCity",
@@ -353,7 +295,7 @@ it("returns 400 if no category", async () => {
       title: "This is a test title",
       description:
         "This is a test description. I hope this will work out well.",
-      rating: 5,
+      upvotes: 5,
       streetname: "teststreet",
       zip: "testZip",
       city: "testCity",
@@ -373,7 +315,7 @@ it("returns 201 if successful", async () => {
       title: "This is a test title",
       description:
         "This is a test description. I hope this will work out well.",
-      rating: 5,
+      upvotes: 5,
       streetname: "teststreet",
       zip: "testZip",
       city: "testCity",
@@ -394,7 +336,7 @@ it("returns spot if successful", async () => {
       title: "This is a test title",
       description:
         "This is a test description. I hope this will work out well.",
-      rating: 5,
+      upvotes: 5,
       streetname: "teststreet",
       zip: "testZip",
       city: "testCity",

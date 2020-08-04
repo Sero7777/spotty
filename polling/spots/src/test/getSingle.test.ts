@@ -11,7 +11,7 @@ it("returns 200 if the spot was found", async () => {
       title: "This is a test title",
       description:
         "This is a test description. I hope this will work out well.",
-      rating: 5,
+      upvotes: 5,
       streetname: "teststreet",
       zip: "testZip",
       city: "testCity",
@@ -38,7 +38,7 @@ it("returns spot if the spot exists", async () => {
       title: title,
       description:
         "This is a test description. I hope this will work out well.",
-      rating: 5,
+      upvotes: 5,
       streetname: "teststreet",
       zip: "testZip",
       city: "testCity",
