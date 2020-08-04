@@ -76,7 +76,7 @@ const SpotItem = (props) => {
                     {props.spot.username === props.username ? userActionButtons : null}
                 </div>
                 <div className="spots__content__item-caption"><span>{props.spot.title}</span></div>
-                <div className="spots__content__item-rating"><span className="spots__content__item-rating-value">{props.spot.rating} </span>Upvotes</div>
+                <div className="spots__content__item-rating"><span className="spots__content__item-rating-value">{props.spot.upvotes} </span>Upvotes</div>
                 <div className="spots__content__item-description">{props.spot.description}</div>
             </div>
             {triggerdSpotModal()}

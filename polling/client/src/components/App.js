@@ -9,46 +9,45 @@ import Header from "./Header";
 import Impressum from "./Impressum";
 import PrivateRoute from "./PrivateRoute"
 import PublicRoute from "./PublicRoute"
-import Profile from "./Profile/Profile"
 import ListView from "./ListView"
-import Test from "./Test"
+import Profile from "./Profile/Profile"
 
 const App = (props) => {
 
     useEffect(() => {
-        // login if cookie exists
-        if (Cookies.get("express:sess")) {
-            console.log("exists")
-            props.getUser()
-        } else {
-            console.log("doesnt exist")
-        }
+        const fetchData = async () => {
+            if (Cookies.get("express:sess")) {
+                await props.getUser()
 
-        // get Spots initially
-        console.log("Fetching spots ...")
-        props.getSpots()
+                console.log("Fetching spots ...")
+                await props.getSpots()
+            } 
+        }
+        fetchData()
     }, [])
 
     return (
         < BrowserRouter >
             <div className="container">
                 <Header />
-{/*                 
-                <PublicRoute exact path="/register" component={Register}/>
-                <Route exact path="/register" component={Register}/>
-
-                <PrivateRoute exact path="/impressum" component={Impressum}/>
-                <PrivateRoute exact path="/profile" component={Profile} />
-                <Route exact path="/">
-                    <Redirect to="/register" />
-                </Route> */}
-
-                <Route exact path="/test" component={Test} />
-
-                <Route exact path="/list" component={ListView} />
+                <Route exact path="/" component={Register}>
+                    {props.auth ? <Redirect to="/list" /> : null}
+                </Route>
+                <Route exact path="/register" component={Register}>
+                    {props.auth ? <Redirect to="/list" /> : null}
+                </Route>
+                <Route exact path="/impressum" component={Impressum} />
+                <Route exact path="/list" component={ListView}>
+                    {props.auth ? null : <Redirect to="/register" />}    
+                </Route>
             </div>
         </BrowserRouter>
     )
 }
 
-export default connect(null, { getUser, getSpots })(App);
+const mapStateToProps = state => {
+    console.log(state.user.username !== null ? true : false)
+    return { auth: state.user.username !== null ? true : false }
+}
+
+export default connect(mapStateToProps, { getUser, getSpots })(App);

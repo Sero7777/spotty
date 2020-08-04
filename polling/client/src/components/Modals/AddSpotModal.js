@@ -32,7 +32,7 @@ const AddSpotsModal = (props) => {
     })
 
     const onSubmit = async formValues => {
-        formValues.rating = 1
+        formValues.upvotes = 0
         formValues.latitude = 76.2
         formValues.longitude = 23.232
 

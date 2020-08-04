@@ -46,8 +46,6 @@ export const register = formValues => async dispatch => {
 export const getSpots = () => async dispatch => {
     const response = await queryRequest.get("/get/all", { withCredentials: true })
 
-    console.log("status code from fetching spots " + response.status)
-
     if (response.status === 200) {
         dispatch({ type: GET_SPOTS, payload: response.data })
     }

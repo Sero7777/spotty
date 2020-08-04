@@ -3,13 +3,15 @@ import { connect } from 'react-redux';
 
 import logo_register from "../assets/logo-register.png";
 import Footer from "./Footer";
-import { register } from "../actions";
+import { register, getSpots } from "../actions";
 import RegisterForm from "./Registerform";
 
 const Register = (props) => {
 
     const onSubmit = async formValues => {
-        return await props.register(formValues)
+        const res = await props.register(formValues)
+
+        if (res.status === 201) props.getSpots()
     }
 
     return (
@@ -40,5 +42,5 @@ const Register = (props) => {
 
 export default connect(
     null,
-    { register }
+    { register, getSpots }
 )(Register)

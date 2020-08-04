@@ -3,14 +3,13 @@ import { Redirect, Route } from "react-router-dom"
 import { connect } from "react-redux"
 
 const PublicRoute = ({ component: Component, ...rest }) => {
-    console.log(rest)
     return <Route
         {...rest}
         render={props =>
             rest.loggedIn ? (
                 <Redirect
                     to={{
-                        pathname: "/profile",
+                        pathname: "/list",
                         state: { from: props.location }
                     }}
                 />

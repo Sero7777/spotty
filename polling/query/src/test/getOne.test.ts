@@ -57,7 +57,7 @@ it("returns spot if successful", async () => {
     .send({ id: spotWithId._id })
     .expect(200);
 
-  expect(res2.body.rating).toEqual(5);
+  expect(res2.body.upvotes).toEqual(5);
 });
 
 it("returns 400 if spot not existant", async () => {

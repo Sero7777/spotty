@@ -3,26 +3,17 @@ import { Redirect, Route } from "react-router-dom"
 import { connect } from "react-redux"
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-    console.log("is logged in?: " + rest.loggedIn)
+    console.log(rest)
     return <Route
         {...rest}
         render={props =>
-            rest.loggedIn ? (
-                <Component {...props} />
-            ) : (
-                    <Redirect
-                        to={{
-                            pathname: "/impressum",
-                            state: { from: props.location }
-                        }}
-                    />
-                )}
+            props.auth ? <Component {...props} /> : <Redirect to="/" />}
     />
 }
 
 const mapStateToProps = state => {
     console.log(state.user.username !== null ? true : false)
-    return { loggedIn: state.user.username !== null ? true : false }
+    return { auth: state.user.username !== null ? true : false }
 }
 
 export default connect(mapStateToProps)(PrivateRoute)

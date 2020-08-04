@@ -44,7 +44,7 @@ const SpotItemModal = (props) => {
                     {props.spot.category}
                 </div>
                 <div className="spotModal__category-upvotes--upvotes pd-left-xs">
-                    {props.spot.rating} Upvotes
+                    {props.spot.upvotes} Upvotes
                 </div>
             </div>
 
