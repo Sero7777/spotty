@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import LoginForm from "./LoginForm"
 import { logIn, getSpots } from "../actions/index"
 import ActionBar from "./ActionBar"
+import logo_spotty from "../assets/logo-spotty.png";
+
 
 const Header = (props) => {
     const onSubmit = async formValues => {
@@ -23,8 +25,8 @@ const Header = (props) => {
 
     return (
         <header className="header">
-            <Link to="/">
-                <img src="#" alt="Spotty logo" className="header__logo mg-left-s" />
+            <Link to="/" className="header__logo__container">
+                <img src={logo_spotty} alt="Spotty logo" className="header__logo mg-left-s" />
             </Link>
             <div className="header__logo-name">Spotty</div>
             {loginBar(props)}
