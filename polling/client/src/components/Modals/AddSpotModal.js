@@ -33,14 +33,12 @@ const AddSpotsModal = (props) => {
 
     const onSubmit = async formValues => {
         formValues.upvotes = 0
-        formValues.latitude = 76.2
-        formValues.longitude = 23.232
 
-        const status = await createSpot(formValues)
+        const res = await createSpot(formValues)
 
-        if (status === 201) props.onDismiss()
+        if (res.status === 201) props.onDismiss()
 
-        else console.log("Something went wrong")
+        else console.log(res.reason)
     }
 
     return (
@@ -69,6 +67,10 @@ const AddSpotsModal = (props) => {
                     </Field>
                     <ErrorMessage name="category" component="div" className="register__input__form__error" />
                 </div>
+                <div>
+                    <Field name="pic" type="text" placeholder="picture url" className="spots__add__modal__field--stretch"/>
+                    <ErrorMessage name="pic" component="div" className="register__input__form__error" />
+                </div>
                 <div className="spots__add__modal__street-zip">
                     <div className="spots__add__modal__street-zip--name">
                         <Field name="streetname" type="text" placeholder="streetname" className="spots__add__modal__field--stretch"/>
@@ -88,10 +90,6 @@ const AddSpotsModal = (props) => {
                         <Field name="country" type="text" placeholder="country" className="spots__add__modal__field--stretch"/>
                         <ErrorMessage name="country" component="div" className="register__input__form__error" />
                     </div>
-                </div>
-                <div>
-                    <Field name="pic" type="text" placeholder="picture url" className="spots__add__modal__field--stretch"/>
-                    <ErrorMessage name="pic" component="div" className="register__input__form__error" />
                 </div>
 
                 <div className="spots__add__modal__btns">

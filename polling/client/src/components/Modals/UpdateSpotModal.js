@@ -34,28 +34,11 @@ const UpdateSpotModal = (props) => {
     const onSubmit = async formValues => {
         let hasChanged = false
 
-        Object.keys(formValues).forEach(key => { if (props.spot[`${key}`] != formValues[`${key}`]) hasChanged = true })
+        Object.keys(formValues).forEach(key => { if (props.spot[`${key}`] !== formValues[`${key}`]) hasChanged = true })
         console.log(hasChanged)
 
         if (hasChanged) {
-            // if newAdress == true --> do new api req and safe afterwards
-            const newAdress = formValues.streetname != props.spot.streetname
-                ? true
-                : formValues.zip != props.spot.zip
-                    ? true
-                    : formValues.city != props.spot.city
-                        ? true
-                        : formValues.country != props.spot.country
-                            ? true
-                            : false
-
             const updatedSpot = {...props.spot, ...formValues}
-
-            if (newAdress) {
-                // do api request & change newSpot properties
-                // const newSpotLangLong = {...s}
-            }
-
             const status = await updateSpot(updatedSpot)
 
             if (status === 200) props.onDismiss()
@@ -95,29 +78,29 @@ const UpdateSpotModal = (props) => {
                     </Field>
                     <ErrorMessage name="category" component="div" className="register__input__form__error" />
                 </div>
+                <div>
+                    <Field name="pic" type="text" placeholder="picture url" className="spots__add__modal__field--stretch" />
+                    <ErrorMessage name="pic" component="div" className="register__input__form__error" />
+                </div>
                 <div className="spots__add__modal__street-zip">
                     <div className="spots__add__modal__street-zip--name">
-                        <Field name="streetname" type="text" placeholder="streetname" className="spots__add__modal__field--stretch" />
+                        <Field name="streetname" type="text" placeholder="streetname" className="spots__add__modal__field--stretch" disabled={true}/>
                         <ErrorMessage name="streetname" component="div" className="register__input__form__error" />
                     </div>
                     <div className="spots__add__modal__street-zip--zip">
-                        <Field name="zip" type="text" placeholder="zip" className="spots__add__modal__field--stretch" />
+                        <Field name="zip" type="text" placeholder="zip" className="spots__add__modal__field--stretch" disabled={true}/>
                         <ErrorMessage name="zip" component="div" className="register__input__form__error" />
                     </div>
                 </div>
                 <div className="spots__add__modal__city-country">
                     <div className="spots__add__modal__city-country--city">
-                        <Field name="city" type="text" placeholder="city" className="spots__add__modal__field--stretch" />
+                        <Field name="city" type="text" placeholder="city" className="spots__add__modal__field--stretch" disabled={true}/>
                         <ErrorMessage name="city" component="div" className="register__input__form__error" />
                     </div>
                     <div className="spots__add__modal__city-country--country">
-                        <Field name="country" type="text" placeholder="country" className="spots__add__modal__field--stretch" />
+                        <Field name="country" type="text" placeholder="country" className="spots__add__modal__field--stretch" disabled={true}/>
                         <ErrorMessage name="country" component="div" className="register__input__form__error" />
                     </div>
-                </div>
-                <div>
-                    <Field name="pic" type="text" placeholder="picture url" className="spots__add__modal__field--stretch" />
-                    <ErrorMessage name="pic" component="div" className="register__input__form__error" />
                 </div>
 
                 <div className="spots__add__modal__btns">

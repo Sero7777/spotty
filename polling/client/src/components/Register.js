@@ -24,7 +24,7 @@ const Register = (props) => {
                             <blockquote>"Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate quam, accusamus magni modi reprehenderit ex eos labore delectus, recusandae necessitatibus animi, blanditiis fugiat error. Ea similique doloremque architecto praesentium ullam!"</blockquote>
                             <blockquote className="mg-top-s">"Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate quam, accusamus magni modi reprehenderit ex eos labore delectus, recusandae necessitatibus animi, blanditiis fugiat error. Ea similique doloremque architecto praesentium ullam!"</blockquote>
                         </div>
-                        <img src={logo_register} alt="Spotty Register Image" className="register__intro__img" />
+                        <img src={logo_register} alt="Spotty Register Logo" className="register__intro__img" />
                     </div>
                     <div className="register__input">
                         <h1>Register</h1>

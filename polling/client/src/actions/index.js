@@ -4,6 +4,7 @@ import {
     GET_SPOTS
 } from "./types";
 import { userRequest, spotRequest, queryRequest, commentRequest } from "../api/spots";
+import axios from "axios"
 
 export const logIn = formValues => async dispatch => {
     const response = await userRequest.post("/login", { ...formValues }, { withCredentials: true })
@@ -52,11 +53,41 @@ export const getSpots = () => async dispatch => {
 }
 
 export const createSpot = async formValues => {
-    const response = await spotRequest.post("/create", { ...formValues }, { withCredentials: true })
 
-    console.log("Creating a spot ...")
+    const API_KEY = "-5aDcBs5PeFM7d14svqGwsElau2-KB0pP-4Rsx13tN4"
 
-    return response.status
+    const baseGeocodeUrl = "https://geocode.search.hereapi.com/v1/geocode?q="
+
+    const geocodeRequestParams = {
+        street: formValues.streetname.trim().replace(/\s/g, "+"),
+        zip: formValues.zip.trim().replace(/\s/g, "+"),
+        city: formValues.city.trim().replace(/\s/g, "+"),
+        country: formValues.country.trim().replace(/\s/g, "+")
+    }
+
+    console.log(geocodeRequestParams)
+
+    const finalRequestString = `${baseGeocodeUrl}${geocodeRequestParams.street}%2C+${geocodeRequestParams.zip}%2C+${geocodeRequestParams.city}%2C+${geocodeRequestParams.country}&apiKey=${API_KEY}`
+
+    console.log(finalRequestString)
+
+    const geocodeRes = await axios.get(finalRequestString)
+
+    console.log(geocodeRes)
+
+    if (geocodeRes.status === 200 && geocodeRes.data.items.length > 0) {
+        const { lat, lng } = geocodeRes.data.items[0].position
+        formValues.latitude = lat
+        formValues.longitude = lng
+
+        const response = await spotRequest.post("/create", { ...formValues }, { withCredentials: true })
+
+        console.log("Creating a spot ...")
+
+        return {status: response.status}
+    }
+
+    return {status: 400, reason: "Wrong Adress"}
 }
 
 export const updateSpot = async formValues => {

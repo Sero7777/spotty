@@ -43,7 +43,6 @@ const App = (props) => {
 }
 
 const mapStateToProps = state => {
-    console.log(state.user.username !== null ? true : false)
     return { auth: state.user.username !== null ? true : false }
 }
 
