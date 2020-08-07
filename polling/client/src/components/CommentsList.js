@@ -1,6 +1,6 @@
 import React from "react";
 
-const SpotsList = (props) => {
+const CommentsList = (props) => {
     return (
         <div className="spots__list">
             {props.children}
@@ -8,4 +8,4 @@ const SpotsList = (props) => {
     )
 }
 
-export default SpotsList;
+export default CommentsList;

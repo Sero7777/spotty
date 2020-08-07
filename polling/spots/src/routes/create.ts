@@ -20,9 +20,9 @@ createSpotRouter.post(
       .trim()
       .isLength({ min: 20 })
       .withMessage("Description has to have a minimun length of 20 characters"),
-    body("rating")
-      .isInt({ min: 1, max: 5 })
-      .withMessage("A Rating between 1 and 5 has to be provided"),
+    body("upvotes")
+      .isInt({ min: 0 })
+      .withMessage("Upvotes have to be positive"),
     body("streetname")
       .not()
       .isEmpty()
@@ -46,7 +46,7 @@ createSpotRouter.post(
     const {
       title,
       description,
-      rating,
+      upvotes,
       streetname,
       zip,
       city,
@@ -63,7 +63,7 @@ createSpotRouter.post(
       title,
       username,
       description,
-      rating,
+      upvotes,
       streetname,
       zip,
       city,
@@ -82,7 +82,7 @@ createSpotRouter.post(
       pic: spot.pic,
       username: spot.username,
       description: spot.description,
-      rating: spot.rating,
+      upvotes: spot.upvotes,
       streetname: spot.streetname,
       zip: spot.zip,
       city: spot.city,

@@ -4,7 +4,7 @@ interface SpotFields {
   title: string;
   username: string;
   description: string;
-  rating: number;
+  upvotes: number;
   streetname: string;
   zip: string;
   city: string;
@@ -20,7 +20,7 @@ export interface SpotDocument extends mongoose.Document {
   pic: string;
   username: string;
   description: string;
-  rating: number;
+  upvotes: number;
   streetname: string;
   zip: string;
   city: string;
@@ -47,7 +47,7 @@ const spotSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  rating: {
+  upvotes: {
     type: Number,
     required: true,
   },

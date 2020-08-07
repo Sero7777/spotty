@@ -1,8 +1,9 @@
 import {
     LOG_IN,
-    LOG_OUT
+    LOG_OUT,
+    GET_SPOTS
 } from "./types";
-import { userRequest } from "../api/spots";
+import { userRequest, spotRequest, queryRequest, commentRequest } from "../api/spots";
 
 export const logIn = formValues => async dispatch => {
     const response = await userRequest.post("/login", { ...formValues }, { withCredentials: true })
@@ -40,4 +41,64 @@ export const register = formValues => async dispatch => {
     }
 
     return response
+}
+
+export const getSpots = () => async dispatch => {
+    const response = await queryRequest.get("/get/all", { withCredentials: true })
+
+    if (response.status === 200) {
+        dispatch({ type: GET_SPOTS, payload: response.data })
+    }
+}
+
+export const createSpot = async formValues => {
+    const response = await spotRequest.post("/create", { ...formValues }, { withCredentials: true })
+
+    console.log("Creating a spot ...")
+
+    return response.status
+}
+
+export const updateSpot = async formValues => {
+    try {
+        const response = await spotRequest.put("/update", { ...formValues }, { withCredentials: true })
+        console.log("Updating a spot ...")
+        return response.status
+
+    } catch (error) {
+        console.log(error.response)
+        return error.response.data.status
+    }
+}
+
+export const deleteSpot = async formValues => {
+    try {
+        const response = await spotRequest.delete("/delete", { data: { ...formValues } }, { withCredentials: true })
+        console.log("Deleting a spot ...")
+        return response.status
+    } catch (error) {
+        console.log(error.response)
+        return error.response.data.status
+    }
+}
+
+export const createComment = async formValues => {
+    const response = await commentRequest.post("/create", { ...formValues }, { withCredentials: true })
+    console.log("Creating a comment ...")
+
+    return response.status
+}
+
+export const updateComment = async formValues => {
+    const response = await commentRequest.put("/update", { ...formValues }, { withCredentials: true })
+    console.log("Updating a spot ...")
+
+    return response.status
+}
+
+export const deleteComment = async formValues => {
+    const response = await commentRequest.delete("/delete", { data: { ...formValues } }, { withCredentials: true })
+    console.log("Deleting a spot ...")
+
+    return response.status
 }

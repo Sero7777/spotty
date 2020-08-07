@@ -9,7 +9,7 @@ it("returns 200 if successful", async () => {
     title: "This is a test title",
     username: "abcdefg",
     description: "This is a test description. I hope this will work out well.",
-    rating: 5,
+    upvotes: 5,
     streetname: "teststreet",
     zip: "testZip",
     city: "testCity",
@@ -38,7 +38,7 @@ it("returns spot if successful", async () => {
     title: "This is a test title",
     username: "abcdefg",
     description: "This is a test description. I hope this will work out well.",
-    rating: 5,
+    upvotes: 5,
     streetname: "teststreet",
     zip: "testZip",
     city: "testCity",
@@ -57,7 +57,7 @@ it("returns spot if successful", async () => {
     .send({ id: spotWithId._id })
     .expect(200);
 
-  expect(res2.body.rating).toEqual(5);
+  expect(res2.body.upvotes).toEqual(5);
 });
 
 it("returns 400 if spot not existant", async () => {

@@ -7,21 +7,13 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     return <Route
         {...rest}
         render={props =>
-            rest.loggedIn ? (
-                <Component {...props} />
-            ) : (
-                    <Redirect
-                        to={{
-                            pathname: "/register",
-                            state: { from: props.location }
-                        }}
-                    />
-                )}
+            props.auth ? <Component {...props} /> : <Redirect to="/" />}
     />
 }
 
 const mapStateToProps = state => {
-    return { loggedIn: state.user.username !== null ? true : false }
+    console.log(state.user.username !== null ? true : false)
+    return { auth: state.user.username !== null ? true : false }
 }
 
 export default connect(mapStateToProps)(PrivateRoute)

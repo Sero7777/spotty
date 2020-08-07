@@ -15,7 +15,7 @@ it("returns 200 if successful", async () => {
         title: "This is a test title",
         description:
           "This is a test description. I hope this will work out well.",
-        rating: 5,
+        upvotes: 5,
         streetname: "teststreet",
         zip: "testZip",
         city: "testCity",
@@ -47,7 +47,7 @@ it("updates if successful", async () => {
       title: "This is a test title",
       description:
         "This is a test description. I hope this will work out well.",
-      rating: 5,
+      upvotes: 5,
       streetname: "teststreet",
       zip: "testZip",
       city: "testCity",
@@ -81,7 +81,7 @@ it("returns 404 is spot does not exist", async () => {
         title: "This is a test title",
         description:
           "This is a test description. I hope this will work out well.",
-        rating: 5,
+        upvotes: 5,
         streetname: "teststreet",
         zip: "testZip",
         city: "testCity",
@@ -115,7 +115,7 @@ it("returns 401 if unauthorized", async () => {
         title: "This is a test title",
         description:
           "This is a test description. I hope this will work out well.",
-        rating: 5,
+        upvotes: 5,
         streetname: "teststreet",
         zip: "testZip",
         city: "testCity",
@@ -148,7 +148,7 @@ it("returns 400 if invalid input", async () => {
       title: "This is a test title",
       description:
         "This is a test description. I hope this will work out well.",
-      rating: 5,
+      upvotes: 5,
       streetname: "teststreet",
       zip: "testZip",
       city: "testCity",
