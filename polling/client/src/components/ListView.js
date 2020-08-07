@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React from "react"
 import SpotsList from "./SpotsList"
 import SpotItem from "./SpotItem"
 import { connect } from 'react-redux';

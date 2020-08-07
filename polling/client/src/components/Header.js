@@ -11,7 +11,7 @@ const Header = (props) => {
     const onSubmit = async formValues => {
         const res =  await props.logIn(formValues)
 
-        if (res.status == 200) props.getSpots()
+        if (res.status === 200) props.getSpots()
     }
 
     const loginBar = (props) => {
