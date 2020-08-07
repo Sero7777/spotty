@@ -7,10 +7,7 @@ import { connect } from "react-redux"
 import Register from "./Register";
 import Header from "./Header";
 import Impressum from "./Impressum";
-import PrivateRoute from "./PrivateRoute"
-import PublicRoute from "./PublicRoute"
 import ListView from "./ListView"
-import Profile from "./Profile/Profile"
 
 const App = (props) => {
 
