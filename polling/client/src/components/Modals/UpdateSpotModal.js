@@ -17,25 +17,12 @@ const UpdateSpotModal = (props) => {
         category: Yup.string()
             .trim()
             .required("category has to be provided"),
-        streetname: Yup.string()
-            .trim()
-            .required("Required field"),
-        zip: Yup.string()
-            .trim()
-            .required("Required field"),
-        city: Yup.string()
-            .trim()
-            .required("Required field"),
-        country: Yup.string()
-            .trim()
-            .required("Required field")
     })
 
     const onSubmit = async formValues => {
         let hasChanged = false
 
         Object.keys(formValues).forEach(key => { if (props.spot[`${key}`] !== formValues[`${key}`]) hasChanged = true })
-        console.log(hasChanged)
 
         if (hasChanged) {
             const updatedSpot = {...props.spot, ...formValues}
@@ -85,21 +72,17 @@ const UpdateSpotModal = (props) => {
                 <div className="spots__add__modal__street-zip">
                     <div className="spots__add__modal__street-zip--name">
                         <Field name="streetname" type="text" placeholder="streetname" className="spots__add__modal__field--stretch" disabled={true}/>
-                        <ErrorMessage name="streetname" component="div" className="register__input__form__error" />
                     </div>
                     <div className="spots__add__modal__street-zip--zip">
                         <Field name="zip" type="text" placeholder="zip" className="spots__add__modal__field--stretch" disabled={true}/>
-                        <ErrorMessage name="zip" component="div" className="register__input__form__error" />
                     </div>
                 </div>
                 <div className="spots__add__modal__city-country">
                     <div className="spots__add__modal__city-country--city">
                         <Field name="city" type="text" placeholder="city" className="spots__add__modal__field--stretch" disabled={true}/>
-                        <ErrorMessage name="city" component="div" className="register__input__form__error" />
                     </div>
                     <div className="spots__add__modal__city-country--country">
                         <Field name="country" type="text" placeholder="country" className="spots__add__modal__field--stretch" disabled={true}/>
-                        <ErrorMessage name="country" component="div" className="register__input__form__error" />
                     </div>
                 </div>
 

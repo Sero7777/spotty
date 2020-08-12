@@ -26,6 +26,10 @@ spec:
             backend:
               serviceName: query-service
               servicePort: 3000
+          - path: /api/maptoken/?(.*)
+            backend:
+              serviceName: maptoken-service
+              servicePort: 3000    
           - path: /?(.*)
             backend:
               serviceName: client-service

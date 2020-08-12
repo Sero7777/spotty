@@ -703,3 +703,37 @@ li {
   .updateCommentModal__comment--content {
     border-top: var(--line-white);
     padding: 1rem; }
+
+.mapView {
+  height: 95vh;
+  width: 100vw; }
+
+.callout__container {
+  height: 30vh;
+  width: 20vw;
+  overflow: hidden;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
+  .callout__container::-webkit-scrollbar {
+    display: none; }
+  .callout__container h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; }
+  .callout__container img {
+    height: auto;
+    width: 100%; }
+
+.callout__flex-container {
+  display: flex;
+  justify-content: space-around; }
+  .callout__flex-container button {
+    border: none;
+    outline: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer; }
