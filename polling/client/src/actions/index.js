@@ -83,7 +83,6 @@ export const createSpot = async formValues => {
         const response = await spotRequest.post("/create", { ...formValues }, { withCredentials: true })
 
         console.log("Creating a spot ...")
-
         return {status: response.status}
     }
 

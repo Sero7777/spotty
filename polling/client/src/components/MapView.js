@@ -146,7 +146,7 @@ const MapView = (props) => {
         const annotation = new markerAnnotation.current(coordinate, {
             callout: calloutDelegate,
             // clusteringIdentifier: "spot",
-            displayPrioroty: spot.upvotes
+            displayPriority: spot.upvotes
         })
 
         return annotation
