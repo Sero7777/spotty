@@ -8,6 +8,7 @@ import Register from "./Register";
 import Header from "./Header";
 import Impressum from "./Impressum";
 import ListView from "./ListView"
+import MapView from "./MapView"
 
 const App = (props) => {
 
@@ -18,7 +19,7 @@ const App = (props) => {
 
                 console.log("Fetching spots ...")
                 await props.getSpots()
-            } 
+            }
         }
         fetchData()
     }, [])
@@ -35,8 +36,9 @@ const App = (props) => {
                 </Route>
                 <Route exact path="/impressum" component={Impressum} />
                 <Route exact path="/list" component={ListView}>
-                    {props.auth ? null : <Redirect to="/register" />}    
+                    {props.auth ? null : <Redirect to="/register" />}
                 </Route>
+                <Route exact path="/map" component={MapView} />
             </div>
         </BrowserRouter>
     )

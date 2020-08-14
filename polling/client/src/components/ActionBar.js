@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import ActionItem from "./HeaderActionItem"
 import { connect } from "react-redux"
-import { logOut } from "../actions/index"
+import { logOut, changeView } from "../actions/index"
 import Modal from "./Modals/Modal"
 import AddSpotModal from "./Modals/AddSpotModal"
 import { Link } from "react-router-dom";
@@ -27,7 +27,11 @@ const ActionBar = (props) => {
     return (
         <div className="header__loggedIn mg-right-xl">
             <ActionItem itemText="Add" clickAction={() => { setAddModalTriggered(true) }} />
-            <Link to="/list" className="header__loggedIn__item">List</Link>
+
+            {props.listView ?
+                <Link to="/list" className="header__loggedIn__item" onClick={() => props.changeView()}>List</Link> :
+                <Link to="/map" className="header__loggedIn__item" onClick={() => props.changeView()}>Map</Link>
+            }
             <div className="header__loggedIn__username header__loggedIn__item pd-left-l pd-right-l">{props.username}</div>
 
             <button onClick={onLogout} className="header__logout-button mg-left-s pd-left-xs pd-right-xs">Logout</button>
@@ -37,7 +41,7 @@ const ActionBar = (props) => {
 }
 
 const mapStateToProps = state => {
-    return { username: state.user.username };
+    return { username: state.user.username, listView: state.listView };
 };
 
-export default connect(mapStateToProps, { logOut })(ActionBar)
+export default connect(mapStateToProps, { logOut, changeView })(ActionBar)

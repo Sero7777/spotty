@@ -1,7 +1,8 @@
 import {
     LOG_IN,
     LOG_OUT,
-    GET_SPOTS
+    GET_SPOTS,
+    CHANGE_VIEW
 } from "./types";
 import { userRequest, spotRequest, queryRequest, commentRequest } from "../api/spots";
 import axios from "axios"
@@ -83,7 +84,6 @@ export const createSpot = async formValues => {
         const response = await spotRequest.post("/create", { ...formValues }, { withCredentials: true })
 
         console.log("Creating a spot ...")
-
         return {status: response.status}
     }
 
@@ -132,4 +132,10 @@ export const deleteComment = async formValues => {
     console.log("Deleting a spot ...")
 
     return response.status
+}
+
+export const changeView = () => {
+    return {
+        type: CHANGE_VIEW
+    }
 }

@@ -40,6 +40,14 @@ build:
             manual:
               - src: "src/**/*.ts"
                 dest: .
+        - image: coffee51/maptoken
+          context: maptoken
+          docker:
+              dockerfile: Dockerfile
+          sync: 
+            manual:
+              - src: "src/**/*.ts"
+                dest: .
         - image: coffee51/client
           context: client
           docker:
@@ -49,4 +57,6 @@ build:
               - src: '**/*.js'
                 dest: .
               - src: "**/*.css"
+                dest: .
+              - src: "**/*.scss"
                 dest: .
