@@ -1,6 +1,8 @@
 const axios = require("axios")
 const randomstring = require("randomstring");
 
+const args = require("minimist")(process.argv.slice(2))
+
 const user = {
     email: "1232242325@abc.de",
     username: "123222352445abcd",
@@ -40,18 +42,20 @@ const login = async () => {
 
 const createSpot = async (randomSpot) => {
     try {
-        console.log("Creating spot")
-        console.log(randomSpot)
+        console.log("Creating spot ...")
         const spotRes = await axios.post("http://spotty.com/api/spots/create", randomSpot, { headers: { "Cookie": String(cookies) } })
-        console.log(spotRes.data)
-        console.log("Successfully created a spot")
     } catch (error) {
         console.log(error.response.data)
     }
 }
 
 const createRandomSpots = () => {
-    for (let index = 0; index < 1000; index++) {
+    let amount = 100
+    if (!args.s) console.log("No amount was provided. Using default amount of 100 spots.")
+    else if (isNaN(args.s)) console.log("Provided an invalid amount. Using default amount of 100 spots.")
+    else if (args.s < 1) console.log("Provided amount is too small. Using default amount of 100 spots.") 
+    else amount = args.s
+    for (let index = 0; index < amount; index++) {
         const randomSpot = {
             title: randomstring.generate(10),
             description: randomstring.generate(20),

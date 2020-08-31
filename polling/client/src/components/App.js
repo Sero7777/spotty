@@ -22,6 +22,21 @@ const App = (props) => {
             }
         }
         fetchData()
+
+        window.mapkit.init({
+            authorizationCallback: function (done) {
+                fetch("http://spotty.com/api/maptoken")
+                    .then((response) => response.json())
+                    .then((result) => {
+                        done(result.token);
+                    });
+            },
+        })
+
+        const interval = setInterval(async () => {
+            await props.getSpots()
+        }, 5000);
+        return () => clearInterval(interval);
     }, [])
 
     return (
