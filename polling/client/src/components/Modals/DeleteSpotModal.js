@@ -6,7 +6,10 @@ const DeleteSpotModal = (props) => {
     const onSubmit = async () => {
         const status = await deleteSpot({ id: props.spotId })
 
-        if (status === 200) props.onDismiss()
+        if (status === 200) {
+            props.onDismiss()
+            props.onSubmit()
+        }
 
         else console.log("Something went wrong")
     }

@@ -408,15 +408,12 @@ li {
     align-items: center;
     justify-content: space-around;
     cursor: default; }
-    .spots__content__item--user-actions button {
-      border: none;
-      outline: none;
-      padding: 0.5rem 1rem;
-      cursor: pointer; }
-    .spots__content__item--user-actions button:hover {
-      background-color: var(--color-grey-light-1); }
+    .spots__content__item--user-actions span {
+      border-right: var(--line-white);
+      width: 1px;
+      height: 100%; }
   .spots__content__item-caption {
-    grid-column: 4 / span 6;
+    grid-column: 4 / -1;
     grid-row: 1 / span 3;
     font-size: 3rem;
     border: var(--line-white);
@@ -622,6 +619,13 @@ li {
     width: 40%; }
     .spotModal__adress-username--username--createdBy {
       font-style: italic; }
+
+.spotModal__actions {
+  display: flex;
+  border-bottom: var(--line);
+  justify-content: space-around; }
+  .spotModal__actions button {
+    padding: .5rem 1rem; }
 
 .comment__container {
   display: flex;

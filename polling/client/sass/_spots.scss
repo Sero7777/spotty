@@ -39,20 +39,15 @@
 
     cursor: default;
 
-    & button {
-        border: none;
-        outline: none;
-        padding: 0.5rem 1rem;
-        cursor: pointer;
-    }
-
-    & button:hover {
-        background-color: var(--color-grey-light-1);
+    & span {
+        border-right: var(--line-white);
+        width: 1px;
+        height: 100%;
     }
   }
 
   &-caption {
-    grid-column: 4 / span 6;
+    grid-column: 4 / -1;
     grid-row: 1 / span 3;
 
     font-size: 3rem;
