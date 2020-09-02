@@ -68,9 +68,18 @@ const createRandomSpot = () => {
 }
 
 const changeSpotsRandomly = () => {
-    if (!args.i) console.log("No interval was provided. Using default interval of 5 seconds.")
-    else if (isNaN(args.i)) console.log("Provided an invalid interval. Using default interval of 5 seconds.")
-    else if (args.i < 1) console.log("Provided interval is too small. Using default interval of 5 seconds.") 
+    if (!args.i) {
+        console.log("No interval was provided. Using default interval of 1-3 seconds.")
+        changeSpotsRandomInterval()
+    }
+    else if (isNaN(args.i)) {
+        console.log("Provided an invalid interval. Using default interval of 1-3 seconds.")
+        changeSpotsRandomInterval()
+    }
+    else if (args.i < 1) {
+        console.log("Provided interval is too small. Using default interval of 1-3 seconds.")
+        changeSpotsRandomInterval()
+    }
     else {
         setInterval(async () => {
             const rand = getRandomIntNumber(0, 2)
@@ -78,8 +87,6 @@ const changeSpotsRandomly = () => {
             else deleteRandomSpot()
         }, args.i * 1000);
     }
-
-    changeSpotsRandomInterval()
 }
 
 const changeSpotsRandomInterval = () => {
@@ -90,7 +97,7 @@ const changeSpotsRandomInterval = () => {
         else deleteRandomSpot()
         changeSpotsRandomInterval()
     }, rand);
-    
+
 }
 
 const deleteRandomSpot = async () => {

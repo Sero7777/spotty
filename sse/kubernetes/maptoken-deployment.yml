@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: maptoken-deployment
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            name: maptoken
+    template:
+        metadata:
+            labels:
+                name: maptoken
+        spec:
+            containers:
+                - name: maptoken
+                  image: coffee51/maptoken
