@@ -1,0 +1,71 @@
+.register {
+    height: 90%;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    &__container {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    & h1 {
+        font-size: 4rem;
+        font-style: italic;
+    }
+
+    &__intro {
+        display: flex;
+        flex-direction: column;
+        width: 40%;
+        align-items: center;
+
+        &__quote {
+            font-style: italic;
+            font-size: 2rem;
+            align-items: center;
+        }
+
+        &__img {
+            width: 100%;
+        }
+    }
+
+    &__input {
+        display: flex;
+        flex-direction: column;
+        width: 40%;
+        align-items: start;
+
+        & h1 {
+            font-style: normal;
+        }
+
+        & h3 {
+            font-size: 3rem;
+            font-style: italic;
+            font-weight: normal;
+        }
+
+        &__form {
+            display: flex;
+            flex-direction: column;
+            width: 30%;
+
+            &__legal {
+                text-align: justify;
+            }
+
+            & input {
+                width: 100%;
+                font-size: 1rem;
+            }
+
+            &__error {
+                color: red;
+                font-size: 1.25rem;
+            }
+        }
+    }
+}
