@@ -1,0 +1,44 @@
+.mapView {
+  height: 95vh;
+  width: 100vw;
+}
+
+.callout__container {
+  height: 30vh; 
+  width: 20vw;
+  overflow: hidden;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  & h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  & img {
+    height: auto;
+    width: 100%;
+  }
+}
+
+.callout__flex-container {
+  display: flex;
+  justify-content: space-around;
+
+  & button {
+    border: none;
+    outline: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
+}

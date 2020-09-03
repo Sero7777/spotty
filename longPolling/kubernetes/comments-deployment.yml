@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: comments-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: comments
+  template:
+    metadata:
+      labels:
+        name: comments
+    spec:
+      containers:
+        - name: comments
+          image: coffee51/comments
+          env:
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NATS_URL
+              value: 'http://nats-service:4222'
+            - name: NATS_CLUSTER_ID
+              value: spotty
+            - name: MONGO_URL
+              value: 'mongodb://comments-mongo-service:27017/comments'
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_SECRET
