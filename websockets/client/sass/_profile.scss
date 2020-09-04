@@ -1,0 +1,110 @@
+.profile {
+  height: 95vh;
+  width: 50vw;
+
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+
+  &__container {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    height: 40%;
+    border-bottom: var(--line);
+  }
+
+  &__pic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__image {
+      border-radius: 50%;
+      height: 75%;
+      width: 75%;
+    }
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    width: 20vw;
+
+    font-size: 1.5rem;
+
+    &__container {
+      height: 75%;
+      padding-right: 12.5%;
+      margin-left: -25%;
+    }
+
+    &__top {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &__mid {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &__values {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    &__name {
+      font-size: 2.5rem;
+      font-style: italic;
+      font-weight: bold;
+    }
+
+    &__btn {
+      border: var(--line--bold);
+      background-color: white;
+
+      outline: none;
+      padding: 0.5rem 1rem;
+    }
+
+    &__description {
+      text-align: justify;
+      height: 50%;
+      hyphens: auto;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+
+  &__spots {
+    display: flex;
+    flex-direction: column;
+    height: 60%;
+
+    &__buttons {
+      display: flex;
+      justify-content: space-evenly;
+
+      &__border {
+        border-right: var(--line);
+      }
+    }
+
+    & button {
+      text-transform: uppercase;
+
+      color: var(--color-grey-light-4);
+      font-size: 2rem;
+      background-color: transparent;
+      border: none;
+      outline: none;
+    }
+  }
+}
