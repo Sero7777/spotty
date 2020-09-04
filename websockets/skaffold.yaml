@@ -1,0 +1,62 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+    kubectl:
+        manifests:
+            - ./kubernetes/*
+build:
+    local:
+        push: false
+    artifacts:
+        - image: coffee51/authentication
+          context: authentication
+          docker:
+              dockerfile: Dockerfile
+          sync: 
+            manual:
+              - src: "src/**/*.ts"
+                dest: .
+        - image: coffee51/spots
+          context: spots
+          docker:
+              dockerfile: Dockerfile
+          sync: 
+            manual:
+              - src: "src/**/*.ts"
+                dest: .
+        - image: coffee51/comments
+          context: comments
+          docker:
+              dockerfile: Dockerfile
+          sync: 
+            manual:
+              - src: "src/**/*.ts"
+                dest: .
+        - image: coffee51/query
+          context: query
+          docker:
+              dockerfile: Dockerfile
+          sync: 
+            manual:
+              - src: "src/**/*.ts"
+                dest: .
+        - image: coffee51/maptoken
+          context: maptoken
+          docker:
+              dockerfile: Dockerfile
+          sync: 
+            manual:
+              - src: "src/**/*.ts"
+                dest: .
+        - image: coffee51/client
+          context: client
+          docker:
+            dockerfile: Dockerfile
+          sync:
+            manual:
+              - src: '**/*.js'
+                dest: .
+              - src: "**/*.css"
+                dest: .
+              - src: "**/*.scss"
+                dest: .

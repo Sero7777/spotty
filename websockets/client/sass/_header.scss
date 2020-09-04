@@ -1,0 +1,55 @@
+.header {
+  background-color: #f7f7f7;
+  border-bottom: var(--line);
+
+  height: 5%;
+  width: 100vw;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__logo {
+    height: 3.25rem;
+
+    &__container {
+        display: flex;
+        align-items: center;
+    }
+  }
+
+  &__logo-name {
+    font-size: 3rem;
+    font-style: italic;
+  }
+
+  &__login__btn {
+    padding: 0 1rem;
+  }
+
+  &__loggedIn {
+    display: flex;
+    height: 100%;
+
+    &__item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border: 1px solid white;
+      width: 5vw;
+      font-size: 2rem;
+
+      cursor: pointer;
+    }
+
+    &__username {
+        font-style: italic;
+        cursor: default;
+    }
+  }
+
+  &__logout-button {
+      align-self: center;
+  }
+}

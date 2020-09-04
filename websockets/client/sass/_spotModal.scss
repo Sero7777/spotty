@@ -1,0 +1,77 @@
+.spotModal {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+
+    font-size: 1.5rem;
+  }
+
+  &__pic {
+    height: 20vh;
+    width: 100%;
+
+    & img {
+      height: 100%;
+      width: 100%;
+    }
+    border-bottom: var(--line);
+  }
+
+  &__description {
+    border-bottom: var(--line);
+    font-size: 1.25rem;
+  }
+
+  &__category-upvotes {
+    display: flex;
+    border-bottom: var(--line);
+
+    &--category {
+      width: 70%;
+      display: flex;
+      align-items: center;
+      border-right: var(--line);
+    }
+
+    &--upvotes {
+      width: 30%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &__adress-username {
+    display: flex;
+    border-bottom: var(--line);
+
+    &--adress {
+      width: 60%;
+      border-right: var(--line);
+    }
+
+    &--username {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 40%;
+
+      &--createdBy {
+        font-style: italic;
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    border-bottom: var(--line);
+    justify-content: space-around;
+
+    & button {
+        padding: .5rem 1rem;
+    }
+  }
+}

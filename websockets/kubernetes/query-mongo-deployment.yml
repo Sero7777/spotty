@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: query-mongo-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: query-mongo
+  template:
+    metadata:
+      labels:
+        name: query-mongo
+    spec:
+      containers:
+        - name: query-mongo
+          image: mongo
