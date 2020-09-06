@@ -36,12 +36,20 @@ const App = (props) => {
         })
 
         geocoder = new window.mapkit.Geocoder()
-
-        const interval = setInterval(async () => {
-            await props.getSpots()
-        }, 5000);
-        return () => clearInterval(interval);
     }, [])
+
+    useEffect(() => {
+        let interval;
+
+        if (props.auth){
+            interval = setInterval(async () => {
+                await props.getSpots()
+            }, 5000);
+        }
+        return () => {
+            if (props.auth) clearInterval(interval);
+        }
+    }, [props.auth])
 
     return (
         < BrowserRouter >
