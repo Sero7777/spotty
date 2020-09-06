@@ -9,7 +9,7 @@ import logo_spotty from "../assets/logo-spotty.png";
 
 const Header = (props) => {
     const onSubmit = async formValues => {
-        const res =  await props.logIn(formValues)
+        const res = await props.logIn(formValues)
 
         if (res.status === 200) props.getSpots()
     }
@@ -19,7 +19,7 @@ const Header = (props) => {
             case true:
                 return <ActionBar />
             default:
-                return <LoginForm onSubmit={onSubmit} />
+                return <LoginForm onSubmit={onSubmit}/>
         }
     }
 

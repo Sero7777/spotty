@@ -14,10 +14,7 @@ const LoginForm = (props) => {
             .required("Required field")
     })
 
-    const onSubmit = async (formValues, { resetForm }) => {
-        await props.onSubmit(formValues)
-        resetForm()
-    }
+    const onSubmit = async formValues => await props.onSubmit(formValues)
 
     return (
         <Formik
