@@ -68,11 +68,15 @@ const SpotItemModal = (props) => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const status = await createComment({ content, spotId: props.spot.id })
+        if (content.trim().length !== 0) {
+            const status = await createComment({ content, spotId: props.spot.id })
 
-        if (status === 201) setContent("")
+            if (status === 201) setContent("")
 
-        else console.log("something went wrong")
+            else console.log("something went wrong")
+        } else {
+            setContent("")
+        }
     }
 
     return (

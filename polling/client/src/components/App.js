@@ -10,6 +10,8 @@ import Impressum from "./Impressum";
 import ListView from "./ListView"
 import MapView from "./MapView"
 
+export let geocoder;
+
 const App = (props) => {
 
     useEffect(() => {
@@ -32,6 +34,8 @@ const App = (props) => {
                     });
             },
         })
+
+        geocoder = new window.mapkit.Geocoder()
 
         const interval = setInterval(async () => {
             await props.getSpots()

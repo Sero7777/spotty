@@ -56,35 +56,33 @@ export const getSpots = () => async dispatch => {
 }
 
 export const createSpot = async formValues => {
+    const res = await getGeoCoordinates(
+        `${formValues.streetname.trim()} 
+    ${formValues.zip.trim()} 
+    ${formValues.city.trim()} 
+    ${formValues.country.trim()}`)
 
-    const API_KEY = "-5aDcBs5PeFM7d14svqGwsElau2-KB0pP-4Rsx13tN4"
+    if (res.results.length < 1) return { status: 400, reason: "You have entered a Wrong Adress" }
 
-    const baseGeocodeUrl = "https://geocode.search.hereapi.com/v1/geocode?q="
+    const { latitude, longitude } = res.results[0].coordinate
+    formValues.latitude = latitude
+    formValues.longitude = longitude
 
-    const geocodeRequestParams = {
-        street: formValues.streetname.trim().replace(/\s/g, "+"),
-        zip: formValues.zip.trim().replace(/\s/g, "+"),
-        city: formValues.city.trim().replace(/\s/g, "+"),
-        country: formValues.country.trim().replace(/\s/g, "+")
-    }
+    const response = await spotRequest.post("/create", { ...formValues }, { withCredentials: true })
 
+    console.log("Creating a spot ...")
 
-    const finalRequestString = `${baseGeocodeUrl}${geocodeRequestParams.street}%2C+${geocodeRequestParams.zip}%2C+${geocodeRequestParams.city}%2C+${geocodeRequestParams.country}&apiKey=${API_KEY}`
+    if (response.status === 201) return { status: response.status }
+    return { status: 400, reason: "Something went wrong" }
+}
 
-    const geocodeRes = await axios.get(finalRequestString)
-
-    if (geocodeRes.status === 200 && geocodeRes.data.items.length > 0) {
-        const { lat, lng } = geocodeRes.data.items[0].position
-        formValues.latitude = lat
-        formValues.longitude = lng
-
-        const response = await spotRequest.post("/create", { ...formValues }, { withCredentials: true })
-
-        console.log("Creating a spot ...")
-        return {status: response.status}
-    }
-
-    return {status: 400, reason: "Wrong Adress"}
+const getGeoCoordinates = (address) => {
+    return new Promise((resolve, reject) => {
+        geocoder.lookup(address, (error, data) => {
+            if (data) resolve(data)
+            if (error) reject(error)
+        })
+    })
 }
 
 export const updateSpot = async formValues => {
@@ -137,7 +135,7 @@ export const changeView = () => {
     }
 }
 
-export const dispatchSpotEvent = ({type, payload}) => {
+export const dispatchSpotEvent = ({ type, payload }) => {
     return {
         type,
         payload

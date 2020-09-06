@@ -32,6 +32,8 @@ const App = (props) => {
             },
         })
 
+        geocoder = new window.mapkit.Geocoder()
+
         if (props.auth) {
             const socket = io()
             socket.on("spotUpdated", (data) => props.dispatchSpotEvent(data))

@@ -33,6 +33,8 @@ const App = (props) => {
             },
         })
 
+        geocoder = new window.mapkit.Geocoder()
+
         const connectToQueryService = async () => {
             const resStatus = await props.connectToQueryService()
 

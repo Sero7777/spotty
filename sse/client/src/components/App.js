@@ -33,6 +33,8 @@ const App = (props) => {
             },
         })
 
+        geocoder = new window.mapkit.Geocoder()
+
         const events = new EventSource("http://spotty.com/api/query/connect")
         events.onmessage = (event) => event.data ? props.dispatchSpotEvent(JSON.parse(event.data)) : null
         events.onerror = (err) => console.log(err)
