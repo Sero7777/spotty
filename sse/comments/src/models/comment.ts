@@ -50,4 +50,6 @@ const Comment = mongoose.model<CommentDocument, CommentModel>(
   commentSchema
 );
 
-export { Comment };
+const isValidId = (mongoId:string) => mongoose.Types.ObjectId.isValid(mongoId)
+
+export { Comment, isValidId };

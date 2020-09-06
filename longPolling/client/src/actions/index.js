@@ -5,18 +5,21 @@ import {
     CHANGE_VIEW
 } from "./types";
 import { userRequest, spotRequest, queryRequest, commentRequest } from "../api/spots";
-import axios from "axios"
 
 export const logIn = formValues => async dispatch => {
-    const response = await userRequest.post("/login", { ...formValues }, { withCredentials: true })
+    try {
+        const response = await userRequest.post("/login", { ...formValues }, { withCredentials: true })
 
-    if (response.status === 200) {
-        const userResponse = await userRequest.get("/user")
-        const { username } = userResponse.data.user
-        if (userResponse.status === 200) dispatch({ type: LOG_IN, payload: username })
+        if (response.status === 200) {
+            const userResponse = await userRequest.get("/user")
+            const { username } = userResponse.data.user
+            if (userResponse.status === 200) dispatch({ type: LOG_IN, payload: username })
+        }
+
+        return response
+    } catch (error) {
+        return { status: 400 }
     }
-
-    return response
 }
 
 export const getUser = () => async dispatch => {

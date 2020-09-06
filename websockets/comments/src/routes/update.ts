@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import { body } from "express-validator";
-import { Comment } from "../models/comment";
+import { Comment, isValidId } from "../models/comment";
 import {
   CommentNotFoundException,
   auth,
@@ -29,6 +29,8 @@ updateCommentRouter.put(
   requestValidator,
   async (req: Request, res: Response) => {
     const _id = req.body.id;
+
+    if (!isValidId(_id)) throw new CommentNotFoundException()
 
     const { content } = req.body;
 

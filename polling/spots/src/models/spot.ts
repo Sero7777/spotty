@@ -99,4 +99,6 @@ spotSchema.statics.build = (fields: SpotFields) => {
 
 const Spot = mongoose.model<SpotDocument, SpotModel>("Spot", spotSchema);
 
-export { Spot };
+const isValidId = (mongoId:string) => mongoose.Types.ObjectId.isValid(mongoId)
+
+export { Spot, isValidId };

@@ -2,19 +2,20 @@ import express, { Request, Response } from "express";
 import { body } from "express-validator";
 import jwt from "jsonwebtoken";
 import { User } from "../models/user";
-import {Uri} from "./uris"
-import {InvalidRequestException, requestValidator} from "@spotty/shared"
+import { Uri } from "./uris";
+import { InvalidRequestException, requestValidator } from "@spotty/shared";
 
 const router = express.Router();
 
-router.post(Uri.REGISTER,
+router.post(
+  Uri.REGISTER,
   [
-    body("email")
-        .isEmail()
-        .withMessage("Invalid Email"),
+    body("email").isEmail().withMessage("Invalid Email"),
     body("username")
-        .notEmpty()
-        .withMessage("Username has to be prodided"),
+      .isLength({ min: 5 })
+      .withMessage(
+        "Username has to be prodided with a min length of 5 characters"
+      ),
     body("password")
       .trim()
       .isLength({ min: 8 })
