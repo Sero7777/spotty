@@ -26,5 +26,3 @@ const initialize = async () => {
 };
 
 initialize();
-
-// in newer node versions you wont have to wrap the monogoose connection process inside a function

@@ -7,19 +7,11 @@ import { loginRouter } from "./routes/login";
 import { logoutRouter } from "./routes/logout";
 import { userRouter } from "./routes/user";
 import {RouteNotFoundException, errorHandler as exceptionHandler} from "@spotty/shared"
-import cors from "cors";
 
 const app = express();
 
-var corsOptions = {
-  origin: "http://localhost:3000",
-  optionsSuccessStatus: 200,
-  credentials: true,
-};
-
 app.set("trust proxy", true);
 app.use(json());
-app.use(cors(corsOptions));
 app.use(cookieSession({ signed: false, secure: false, httpOnly: false }));
 app.use(registerRouter);
 app.use(loginRouter);

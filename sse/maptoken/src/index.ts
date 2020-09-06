@@ -2,11 +2,9 @@ import express, {Request, Response} from "express";
 import jwt from "jsonwebtoken"
 import { json } from "body-parser";
 import fs from "fs"
-import cors from "cors";
 
 const app = express()
 app.use(json());
-app.use(cors())
 
 app.get("/api/maptoken",async (req: Request, res: Response) => {
     const header = {

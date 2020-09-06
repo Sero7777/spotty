@@ -23,7 +23,6 @@ router.post(Uri.REGISTER,
   requestValidator,
   async (req: Request, res: Response) => {
     const { email, password, username } = req.body;
-    console.log("received request: " + req.hostname)
 
     const userMail = await User.findOne({ email });
 
