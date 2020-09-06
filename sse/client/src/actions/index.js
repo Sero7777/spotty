@@ -5,6 +5,7 @@ import {
     CHANGE_VIEW
 } from "./types";
 import { userRequest, spotRequest, queryRequest, commentRequest } from "../api/spots";
+import {geocoder} from "../components/App"
 
 export const logIn = formValues => async dispatch => {
     try {

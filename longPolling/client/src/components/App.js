@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Route, BrowserRouter, Redirect } from "react-router-dom";
 import Cookies from "js-cookie"
 import { getUser, getSpots, connectToQueryService } from "../actions/index"
@@ -10,7 +10,11 @@ import Impressum from "./Impressum";
 import ListView from "./ListView"
 import MapView from "./MapView"
 
+export let geocoder;
+
 const App = (props) => {
+
+    let loggedIn = useRef(props.auth)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -21,31 +25,41 @@ const App = (props) => {
                 await props.getSpots()
             }
         }
-        fetchData()
 
-        window.mapkit.init({
-            authorizationCallback: function (done) {
-                fetch("http://spotty.com/api/maptoken")
-                    .then((response) => response.json())
-                    .then((result) => {
-                        done(result.token);
-                    });
-            },
-        })
+        if (props.auth) {
+            fetchData()
 
-        geocoder = new window.mapkit.Geocoder()
+            window.mapkit.init({
+                authorizationCallback: function (done) {
+                    fetch("http://spotty.com/api/maptoken")
+                        .then((response) => response.json())
+                        .then((result) => {
+                            done(result.token);
+                        });
+                },
+            })
 
+            geocoder = new window.mapkit.Geocoder()
+        }
+    }, [])
+
+    useEffect(() => {
+        loggedIn.current = props.auth
         const connectToQueryService = async () => {
             const resStatus = await props.connectToQueryService()
 
-            if (resStatus === 200 || resStatus == 502) connectToQueryService()
+            if (resStatus === 200 || resStatus == 502) {
+                if (loggedIn.current) connectToQueryService()
+            }
             else setTimeout(() => {
-                connectToQueryService()
+                if (loggedIn.current) connectToQueryService()
             }, 1000);
         }
 
-        connectToQueryService()
-    }, [])
+        if (loggedIn.current) {
+            connectToQueryService()
+        }
+    }, [props.auth])
 
     return (
         < BrowserRouter >

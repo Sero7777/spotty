@@ -10,6 +10,8 @@ import Impressum from "./Impressum";
 import ListView from "./ListView"
 import MapView from "./MapView"
 
+export let geocoder;
+
 const App = (props) => {
 
     useEffect(() => {

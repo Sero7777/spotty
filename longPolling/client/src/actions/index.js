@@ -5,6 +5,7 @@ import {
     CHANGE_VIEW
 } from "./types";
 import { userRequest, spotRequest, queryRequest, commentRequest } from "../api/spots";
+import {geocoder} from "../components/App"
 
 export const logIn = formValues => async dispatch => {
     try {
@@ -140,12 +141,11 @@ export const changeView = () => {
 
 export const connectToQueryService = () => async dispatch => {
     try {
-        console.log("Calling connect Method()")
         const response = await queryRequest.get("/connect", { withCredentials: true });
         const { type, payload } = response.data
         if (response.status === 200) dispatch({ type, payload })
         return response.status
     } catch (error) {
-        console.log("THIS IS AN ERROR")
+        console.log("Error with the connection to the query service")
     }
 }
