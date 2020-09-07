@@ -8,6 +8,7 @@ export const initSocketIo = (ios: any) => {
 
   io.on("connect", async (socket: any) => {
     if (!verifyToken(getToken(socket))) {
+        console.log("Disconnected again")
       socket.disconnect(true);
     } else {
       console.log("A client connected to query server");
@@ -39,8 +40,13 @@ export enum actions {
 const getToken = (socket: any) => {
   const cookies = socket.handshake.headers.cookie;
   if (!cookies) return null
-  const encodedToken = cookies.split("=")[1].split(";")[0];
+
+  const index = cookies.indexOf("express:sess")
+  if (index === -1) return null
+
+  const encodedToken = cookies.slice(index).split("=")[1].split(";")[0];
   if (!encodedToken.startsWith("ey")) return null;
+
   return JSON.parse(Buffer.from(encodedToken, "base64").toString("utf-8")).jwt;
 };
 
