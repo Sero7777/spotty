@@ -27,6 +27,8 @@ export const getUser = () => async dispatch => {
     const userResponse = await userRequest.get("/user")
     const { username } = userResponse.data.user
     if (userResponse.status === 200) dispatch({ type: LOG_IN, payload: username })
+
+    return userResponse.status
 }
 
 export const logOut = () => async dispatch => {

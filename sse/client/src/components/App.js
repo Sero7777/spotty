@@ -15,15 +15,21 @@ export let geocoder;
 const App = (props) => {
 
     useEffect(() => {
+        const fetchSpots = async () => {
+            await props.getSpots()
+        }
+
         const fetchData = async () => {
             if (Cookies.get("express:sess")) {
-                await props.getUser()
+                const status = await props.getUser()
 
-                console.log("Fetching spots ...")
-                await props.getSpots()
+                if (status === 200) fetchSpots()
             }
         }
+
         fetchData()
+
+        if (props.auth) fetchSpots()
 
         window.mapkit.init({
             authorizationCallback: function (done) {

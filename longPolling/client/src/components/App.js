@@ -17,30 +17,33 @@ const App = (props) => {
     let loggedIn = useRef(props.auth)
 
     useEffect(() => {
+        const fetchSpots = async () => {
+            await props.getSpots()
+        }
+
         const fetchData = async () => {
             if (Cookies.get("express:sess")) {
-                await props.getUser()
+                const status = await props.getUser()
 
-                console.log("Fetching spots ...")
-                await props.getSpots()
+                if (status === 200) fetchSpots()
             }
         }
 
-        if (props.auth) {
-            fetchData()
+        fetchData()
 
-            window.mapkit.init({
-                authorizationCallback: function (done) {
-                    fetch("http://spotty.com/api/maptoken")
-                        .then((response) => response.json())
-                        .then((result) => {
-                            done(result.token);
-                        });
-                },
-            })
+        if (props.auth) fetchSpots()
 
-            geocoder = new window.mapkit.Geocoder()
-        }
+        window.mapkit.init({
+            authorizationCallback: function (done) {
+                fetch("http://spotty.com/api/maptoken")
+                    .then((response) => response.json())
+                    .then((result) => {
+                        done(result.token);
+                    });
+            },
+        })
+
+        geocoder = new window.mapkit.Geocoder()
     }, [])
 
     useEffect(() => {

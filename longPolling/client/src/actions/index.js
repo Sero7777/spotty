@@ -27,6 +27,8 @@ export const getUser = () => async dispatch => {
     const userResponse = await userRequest.get("/user")
     const { username } = userResponse.data.user
     if (userResponse.status === 200) dispatch({ type: LOG_IN, payload: username })
+
+    return userResponse.status
 }
 
 export const logOut = () => async dispatch => {
@@ -67,7 +69,7 @@ export const createSpot = async formValues => {
     ${formValues.country.trim()}`)
 
     if (res.results.length < 1) return { status: 400, reason: "You have entered a Wrong Adress" }
-
+    console.log("Right adress")
     const { latitude, longitude } = res.results[0].coordinate
     formValues.latitude = latitude
     formValues.longitude = longitude
