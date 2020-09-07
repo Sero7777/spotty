@@ -8,7 +8,6 @@ export const initSocketIo = (ios: any) => {
 
   io.on("connect", async (socket: any) => {
     if (!verifyToken(getToken(socket))) {
-        console.log("Disconnected again")
       socket.disconnect(true);
     } else {
       console.log("A client connected to query server");
@@ -16,9 +15,8 @@ export const initSocketIo = (ios: any) => {
       socket.emit("spotUpdated", { type: actions.GET_SPOTS, payload: spots });
     }
 
-    socket.on("disconnect", () => {
-        console.log("client has disconnected from query server")
-    })
+    socket.on("disconnect", () => console.log("client has disconnected from query server"))
+    socket.on("removeclient", () => socket.disconnect(true))
   });
 };
 

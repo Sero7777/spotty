@@ -36,17 +36,20 @@ const App = (props) => {
         })
 
         geocoder = new window.mapkit.Geocoder()
-        const socket = io()
-        socket.on("spotUpdated", (data) => props.dispatchSpotEvent(data))
     }, [])
 
-    // useEffect(() => {
-    //     loggedIn.current = props.auth
-    //     if (loggedIn.current) {
-    //         const socket = io()
-    //         socket.on("spotUpdated", (data) => props.dispatchSpotEvent(data))
-    //     }
-    // }, [props.auth])
+    useEffect(() => {
+        loggedIn.current = props.auth
+        let socket;
+        if (loggedIn.current) {
+            socket = io()
+            socket.on("spotUpdated", (data) => props.dispatchSpotEvent(data))
+        }
+
+        return () => {
+            if (socket) socket.emit("removeclient")
+        }
+    }, [props.auth])
 
     return (
         < BrowserRouter >
