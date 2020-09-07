@@ -143,11 +143,13 @@ export const changeView = () => {
 
 export const connectToQueryService = () => async dispatch => {
     try {
+        console.log("Trying to connect to query serv")
         const response = await queryRequest.get("/connect", { withCredentials: true });
         const { type, payload } = response.data
         if (response.status === 200) dispatch({ type, payload })
         return response.status
     } catch (error) {
         console.log("Error with the connection to the query service")
+        return 404
     }
 }
