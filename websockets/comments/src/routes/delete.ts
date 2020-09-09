@@ -4,7 +4,7 @@ import {
   CommentNotFoundException,
   UnauthorizedException,
 } from "@spotty/shared";
-import { Comment } from "../models/comment";
+import { Comment, isValidId } from "../models/comment";
 import { Uri } from "./uris";
 import {CommentDeletedPublisher} from "../publisher/CommentDeletedPublisher"
 import {natsContainer} from "../nats-container"
@@ -13,6 +13,9 @@ const deleteCommentRouter = express.Router();
 
 deleteCommentRouter.delete(Uri.DELETE, auth, async (req: Request, res: Response) => {
   const _id = req.body.id;
+
+  if (!isValidId(_id)) throw new CommentNotFoundException()
+
   const comment = await Comment.findById({ _id });
 
   if (!comment) {

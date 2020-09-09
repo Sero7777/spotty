@@ -54,7 +54,7 @@ const RegisterForm = (props) => {
                     <ErrorMessage name="passwordRepeat" component="div" className="register__input__form__error"/>
                 </div>
                 <p className="register__input__form__legal mg-bottom-sm mg-top-xs">Durch die Registrierung stimmst du unseren Nutzungsbedingungen zu. In unserer Datenrichtlinie erfährst du, wie wir deine Daten erfassen, verwenden und teilen. Unsere Cookie-Richtlinie erklärt, wie wir Cookies und ähnliche Technologien verwenden.</p>
-                <button className="register__btn">Register</button>
+                <button className="register__btn" type="submit">Register</button>
             </Form>
         </Formik>
     )

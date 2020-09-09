@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Route, BrowserRouter, Redirect } from "react-router-dom";
 import Cookies from "js-cookie"
 import { getUser, getSpots, connectToQueryService } from "../actions/index"
@@ -10,18 +10,28 @@ import Impressum from "./Impressum";
 import ListView from "./ListView"
 import MapView from "./MapView"
 
+export let geocoder;
+
 const App = (props) => {
 
+    let loggedIn = useRef(null)
+
     useEffect(() => {
+        const fetchSpots = async () => {
+            await props.getSpots()
+        }
+
         const fetchData = async () => {
             if (Cookies.get("express:sess")) {
-                await props.getUser()
+                const status = await props.getUser()
 
-                console.log("Fetching spots ...")
-                await props.getSpots()
+                if (status === 200) fetchSpots()
             }
         }
+
         fetchData()
+
+        if (props.auth) fetchSpots()
 
         window.mapkit.init({
             authorizationCallback: function (done) {
@@ -33,17 +43,33 @@ const App = (props) => {
             },
         })
 
-        const connectToQueryService = async () => {
-            const resStatus = await props.connectToQueryService()
+        geocoder = new window.mapkit.Geocoder()
+    }, [])
 
-            if (resStatus === 200 || resStatus == 502) connectToQueryService()
-            else setTimeout(() => {
-                connectToQueryService()
+    useEffect(() => {
+        loggedIn.current = props.auth
+        const connectToQueryService = async () => {
+            console.log("Reconnecting 1")
+            const resStatus = await props.connectToQueryService()
+            if (resStatus === 200 || resStatus == 504) {
+                if (loggedIn.current) {
+                    console.log("Reconnecting 2")
+                    connectToQueryService()
+                }
+            } else if (resStatus !== 404 && resStatus !== 502) setTimeout(() => {
+                 console.log(resStatus)
+                if (loggedIn.current) {
+                    console.log("Reconnecting 3")
+                    connectToQueryService()
+                }
             }, 1000);
         }
 
-        connectToQueryService()
-    }, [])
+        if (loggedIn.current) {
+            console.log("Reconnecting 4")
+            connectToQueryService()
+        }
+    }, [props.auth])
 
     return (
         < BrowserRouter >
@@ -66,7 +92,7 @@ const App = (props) => {
 }
 
 const mapStateToProps = state => {
-    return { auth: state.user.username !== null ? true : false }
+    return { auth: state.user.username }
 }
 
 export default connect(mapStateToProps, { getUser, getSpots, connectToQueryService })(App);

@@ -38,7 +38,7 @@ const SpotItemModal = (props) => {
         if (deleteSpotModal) {
             return (
                 <Modal onDismiss={() => { setDeleteSpotModal(false) }} title={props.spot.title}>
-                    <DeleteSpotModal spotId={props.spot.id} onDismiss={() => setDeleteSpotModal(false)} onSubmit={props.onDismiss}/>
+                    <DeleteSpotModal spotId={props.spot.id} onDismiss={() => setDeleteSpotModal(false)} onSubmit={props.onDismiss} />
                 </Modal>
             )
         }
@@ -52,13 +52,16 @@ const SpotItemModal = (props) => {
         </div>
     )
 
-    const renderComments = props.spot.comments.map(comment => {
-        return (
-            <li key={comment._id}>
-                <Comment comment={comment} />
-            </li>
-        )
-    })
+    const renderComments =
+        props.spot !== undefined ?
+            props.spot.comments.map(comment => {
+                return (
+                    <li key={comment._id}>
+                        <Comment comment={comment} />
+                    </li>
+                )
+            }) :
+            null
 
     const commentsList = (
         <CommentsList>
@@ -68,54 +71,68 @@ const SpotItemModal = (props) => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const status = await createComment({ content, spotId: props.spot.id })
+        if (content.trim().length !== 0) {
+            const status = await createComment({ content, spotId: props.spot.id })
 
-        if (status === 201) setContent("")
+            if (status === 201) setContent("")
 
-        else console.log("something went wrong")
+            else console.log("something went wrong")
+        } else {
+            setContent("")
+        }
     }
 
     return (
         <>
             <div className="spotModal__container">
                 <div className="spotModal__pic pd-bottom-xs">
-                    <img src={props.spot.pic} alt="img pic" onError={(ev) => ev.target.src = fallbackImgUrl} />
+                    <img src={props.spot !== undefined ? props.spot.pic : fallbackImgUrl} alt="img pic" onError={(ev) => ev.target.src = fallbackImgUrl} />
                 </div>
 
-                <div className="spotModal__description pd-bottom-xs pd-top-xs">{props.spot.description}</div>
+                <div className="spotModal__description pd-bottom-xs pd-top-xs">
+                    {props.spot !== undefined ? props.spot.description : "Deleted Spot"}
+                </div>
 
                 <div className="spotModal__category-upvotes pd-bottom-xs pd-top-xs">
                     <div className="spotModal__category-upvotes--category">
-                        {props.spot.category}
+                        {props.spot !== undefined ? props.spot.category : "Deleted Spot"}
                     </div>
                     <div className="spotModal__category-upvotes--upvotes pd-left-xs">
-                        {props.spot.upvotes} Upvotes
+                        {props.spot !== undefined ? props.spot.upvotes + "Upvotes": "Deleted Spot"}
                 </div>
                 </div>
 
 
                 <div className="spotModal__adress-username pd-bottom-xs pd-top-xs">
                     <div className="spotModal__adress-username--adress">
-                        <p>{props.spot.streetname}</p>
-                        <p>{props.spot.zip} {props.spot.city}</p>
-                        <p>{props.spot.country}</p>
+                        {props.spot !== undefined ?
+                            <>
+                                <p>{props.spot.streetname}</p>
+                                <p>{props.spot.zip} {props.spot.city}</p>
+                                <p>{props.spot.country}</p>
+                            </>
+                            :
+                            "Deleted Spot"}
                     </div>
                     <div className="spotModal__adress-username--username">
-                        <p className="spotModal__adress-username--username--createdBy">Created By</p>
-                        <p>{props.spot.username}</p>
+                        {props.spot !== undefined ? <p className="spotModal__adress-username--username--createdBy">Created By</p> : null}
+                        <p>{props.spot !== undefined ? props.spot.username : "Deleted Spot"}</p>
                     </div>
                 </div>
 
-                {props.username === props.spot.username ? spotsActionButtons : null}
 
-                {props.spot.comments.length > 0 ? commentsList : null}
+                {props.spot !== undefined && props.username === props.spot.username ? spotsActionButtons : null}
 
+                {props.spot !== undefined && props.spot.comments.length > 0 ? commentsList : null}
+
+                {props.spot !== undefined ? 
                 <div className="comment__input mg-top-xs mg-bottom-s">
                     <form onSubmit={handleSubmit}>
                         <textarea type="text" placeholder="Enter a Comment" value={content} onChange={e => setContent(e.target.value)} />
                         <button>Submit</button>
                     </form>
-                </div>
+                </div> 
+                : null}
             </div>
             {triggerUpdateSpotModal()}
             {triggerDeleteModal()}

@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Route, BrowserRouter, Redirect } from "react-router-dom";
 import Cookies from "js-cookie"
 import { getUser, getSpots, dispatchSpotEvent } from "../actions/index"
@@ -11,9 +11,12 @@ import Impressum from "./Impressum";
 import ListView from "./ListView"
 import MapView from "./MapView"
 
-
+export let geocoder;
 
 const App = (props) => {
+
+    let loggedIn = useRef(null)
+
     useEffect(() => {
         const fetchData = async () => {
             if (Cookies.get("express:sess")) {
@@ -32,9 +35,19 @@ const App = (props) => {
             },
         })
 
-        if (props.auth) {
-            const socket = io()
+        geocoder = new window.mapkit.Geocoder()
+    }, [])
+
+    useEffect(() => {
+        loggedIn.current = props.auth
+        let socket;
+        if (loggedIn.current) {
+            socket = io()
             socket.on("spotUpdated", (data) => props.dispatchSpotEvent(data))
+        }
+
+        return () => {
+            if (socket) socket.emit("removeclient")
         }
     }, [props.auth])
 

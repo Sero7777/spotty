@@ -28,10 +28,13 @@ const ActionBar = (props) => {
         <div className="header__loggedIn mg-right-xl">
             <ActionItem itemText="Add" clickAction={() => { setAddModalTriggered(true) }} />
 
-            {props.listView ?
-                <Link to="/list" className="header__loggedIn__item" onClick={() => props.changeView()}>List</Link> :
-                <Link to="/map" className="header__loggedIn__item" onClick={() => props.changeView()}>Map</Link>
-            }
+            <Link 
+            to={props.listView ? "/map" : "/list"} 
+            className="header__loggedIn__item" 
+            onClick={() => props.changeView()}>
+                {props.listView ? "Map" : "List"}
+            </Link>
+            
             <div className="header__loggedIn__username header__loggedIn__item pd-left-l pd-right-l">{props.username}</div>
 
             <button onClick={onLogout} className="header__logout-button mg-left-s pd-left-xs pd-right-xs">Logout</button>

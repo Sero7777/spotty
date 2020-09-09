@@ -15,9 +15,8 @@ export const initSocketIo = (ios: any) => {
       socket.emit("spotUpdated", { type: actions.GET_SPOTS, payload: spots });
     }
 
-    socket.on("disconnect", () => {
-        console.log("client has disconnected from query server")
-    })
+    socket.on("disconnect", () => console.log("client has disconnected from query server"))
+    socket.on("removeclient", () => socket.disconnect(true))
   });
 };
 
@@ -39,8 +38,13 @@ export enum actions {
 const getToken = (socket: any) => {
   const cookies = socket.handshake.headers.cookie;
   if (!cookies) return null
-  const encodedToken = cookies.split("=")[1].split(";")[0];
+
+  const index = cookies.indexOf("express:sess")
+  if (index === -1) return null
+
+  const encodedToken = cookies.slice(index).split("=")[1].split(";")[0];
   if (!encodedToken.startsWith("ey")) return null;
+
   return JSON.parse(Buffer.from(encodedToken, "base64").toString("utf-8")).jwt;
 };
 

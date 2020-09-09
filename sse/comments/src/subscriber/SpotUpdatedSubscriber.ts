@@ -15,8 +15,6 @@ export class SpotUpdatedSubscriber extends Subscriber<SpotUpdatedEvent> {
 
     spot.set(data);
 
-    console.log(JSON.stringify(spot));
-
     await spot.save();
 
     msg.ack();

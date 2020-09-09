@@ -1,7 +1,16 @@
-import { getClients, unsubscribe } from "./routes/getAll";
+import { Response } from "express";
+
+let clients: any = [];
+
+export const subscribe = (reqId: string, res: Response) => {
+  clients.push({ reqId, res });
+};
+
+export const unsubscribe = (reqId: string) => {
+  clients = clients.filter((item: any) => item.reqId !== reqId);
+};
 
 export const notifyClients = (type: string, payload: any) => {
-  var clients = getClients();
   const item = {
     type: type,
     payload: payload,

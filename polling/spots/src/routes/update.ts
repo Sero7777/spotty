@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import { body } from "express-validator";
-import { Spot } from "../models/spot";
+import { Spot, isValidId } from "../models/spot";
 import {
   SpotNotFoundException,
   auth,
@@ -50,6 +50,9 @@ updateSpotRouter.put(
   requestValidator,
   async (req: Request, res: Response) => {
     const _id = req.body.id;
+
+    if (!isValidId(_id)) throw new SpotNotFoundException()
+
     const {
       title,
       description,

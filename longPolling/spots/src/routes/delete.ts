@@ -4,7 +4,7 @@ import {
   SpotNotFoundException,
   UnauthorizedException,
 } from "@spotty/shared";
-import { Spot } from "../models/spot";
+import { Spot, isValidId } from "../models/spot";
 import { Uri } from "./uris";
 import { SpotDeletedPublisher } from "../publisher/SpotDeletedPublisher";
 import { natsContainer } from "../nats-container";
@@ -16,6 +16,9 @@ deleteSpotRouter.delete(
   auth,
   async (req: Request, res: Response) => {
     const _id = req.body.id;
+
+    if (!isValidId(_id)) throw new SpotNotFoundException()
+
     const spot = await Spot.findOne({ _id })
 
     if (!spot) {

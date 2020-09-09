@@ -14,13 +14,7 @@ const LoginForm = (props) => {
             .required("Required field")
     })
 
-    const onSubmit = async (formValues, { resetForm }) => {
-        const response = await props.onSubmit(formValues)
-
-        if (response.status === 200) resetForm()
-
-        else console.log("Something went wrong")
-    }
+    const onSubmit = async formValues => await props.onSubmit(formValues)
 
     return (
         <Formik
@@ -37,7 +31,7 @@ const LoginForm = (props) => {
                     <Field name="password" type="password" placeholder="password" />
                     <ErrorMessage name="password" component="span" className="register__input__form__error mg-left-xs" />
                 </span> 
-                <button className="header__login__btn">Login</button>
+                <button className="header__login__btn" type="submit">Login</button>
             </Form>
         </Formik>
     )

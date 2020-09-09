@@ -17,3 +17,9 @@ export const commentRequest = axios.create({
 export const queryRequest = axios.create({
     baseURL: `${domainUrl}/query`
 })
+
+userRequest.interceptors.response.use(function (response) {
+    return response;
+  }, function (error) {
+    return Promise.reject(error);
+  });

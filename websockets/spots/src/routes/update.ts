@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import { body } from "express-validator";
-import { Spot } from "../models/spot";
+import { Spot, isValidId } from "../models/spot";
 import {
   SpotNotFoundException,
   auth,
@@ -63,6 +63,8 @@ updateSpotRouter.put(
       longitude,
       pic,
     } = req.body;
+
+    if (!isValidId(_id)) throw new SpotNotFoundException()
 
     const spot = await Spot.findOne({ _id });
 

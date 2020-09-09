@@ -13,8 +13,8 @@ router.post(Uri.REGISTER,
         .isEmail()
         .withMessage("Invalid Email"),
     body("username")
-        .notEmpty()
-        .withMessage("Username has to be prodided"),
+        .isLength({ min: 5})
+        .withMessage("Username has to be prodided with a min length of 5 characters"),
     body("password")
       .trim()
       .isLength({ min: 8 })
@@ -23,7 +23,6 @@ router.post(Uri.REGISTER,
   requestValidator,
   async (req: Request, res: Response) => {
     const { email, password, username } = req.body;
-    console.log("received request: " + req.hostname)
 
     const userMail = await User.findOne({ email });
 

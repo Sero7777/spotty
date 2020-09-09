@@ -16,7 +16,7 @@ const MapView = (props) => {
     const triggerSpotModal = () => {
         if (spotModalTriggered) {
             return (
-                <Modal onDismiss={() => { setSpotModalTriggered(false) }} title={currentSpotRef.current.title}>
+                <Modal onDismiss={() => { setSpotModalTriggered(false) }} title={currentSpotRef.current !== undefined ? currentSpotRef.current.title : "Deleted Spot"}>
                     <SpotItemModal spot={currentSpotRef.current} onDismiss={() => setSpotModalTriggered(false)} />
                 </Modal>
             )
