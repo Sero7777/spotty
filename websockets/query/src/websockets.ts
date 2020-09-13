@@ -35,7 +35,7 @@ export enum actions {
   GET_SPOTS = "GET_SPOTS",
 }
 
-const getToken = (socket: any) => {
+export const getToken = (socket: any) => {
   const cookies = socket.handshake.headers.cookie;
   if (!cookies) return null
 
@@ -48,7 +48,7 @@ const getToken = (socket: any) => {
   return JSON.parse(Buffer.from(encodedToken, "base64").toString("utf-8")).jwt;
 };
 
-const verifyToken = (token: string) => {
+export const verifyToken = (token: string) => {
   try {
     const payload = jwt.verify(token, process.env.JWT_SECRET!);
     if (!payload) return false;

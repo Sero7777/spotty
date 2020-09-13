@@ -17,7 +17,7 @@ export class CommentUpdatedSubscriber extends Subscriber<CommentUpdatedEvent> {
       throw new SpotNotFoundException();
     }
 
-    const index = spotFromDb.comments.findIndex((x) => x._id == id);
+    const index = spotFromDb.comments.findIndex((x) => x._id.toString() == id.toString());
     if (index != -1) {
       spotFromDb.comments[index].content = content;
       spotFromDb.markModified("comments");

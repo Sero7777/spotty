@@ -12,7 +12,7 @@ export class SpotCreatedSubscriber extends Subscriber<SpotCreatedEvent> {
     spot._id = data.id;
 
     const spotFromDb = await spot.save();
-
+    
     msg.ack();
 
     notifyClients(actions.ADD_SPOT, spotFromDb)

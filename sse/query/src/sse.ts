@@ -1,6 +1,6 @@
 import { Response } from "express";
 
-let clients: any = [];
+export let clients: any = [];
 
 export const subscribe = (reqId: string, res: Response) => {
   clients.push({ reqId, res });
