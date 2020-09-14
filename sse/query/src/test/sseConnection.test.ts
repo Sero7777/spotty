@@ -26,7 +26,7 @@ describe("Testing the connection via server sent events", () => {
   });
 
   it("should receive a response if a spot is created", async (done) => {
-    jest.setTimeout(15000);
+    jest.setTimeout(60000);
     let spotData: any;
 
     setTimeout(() => {
