@@ -6,7 +6,7 @@
   "scripts": {
     "start": "ts-node-dev --poll src/index.ts",
     "test:local": "jest --watchAll --no-cache",
-    "test:remote": "jest"
+    "test:remote": "jest --forceExit"
   },
   "jest": {
     "preset": "ts-jest",
