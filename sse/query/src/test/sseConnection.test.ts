@@ -23,7 +23,7 @@ describe("Testing the connection via server sent events", () => {
         sock.destroy();
       });
     });
-    response.connection.close();
+    // response.connection.close();
   });
 
   it("should receive a response if a spot is created", async (done) => {
