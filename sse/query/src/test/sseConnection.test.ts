@@ -45,6 +45,7 @@ describe("Testing the connection via server sent events", () => {
           response = res;
           spotData = Buffer.from(data, "base64").toString("utf-8");
           expect(spotData).toBeDefined();
+          console.log(spotData)
           done();
         });
       }
