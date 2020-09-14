@@ -29,6 +29,10 @@ describe("Testing the connection via server sent events", () => {
     jest.setTimeout(15000);
     let spotData: any;
 
+    setTimeout(() => {
+        notifyClients("ADD_SPOT", { abd: "def" });
+      }, 5000);
+
     http.get(
       {
         agent: false,
@@ -51,8 +55,6 @@ describe("Testing the connection via server sent events", () => {
       }
     );
 
-    setTimeout(() => {
-      notifyClients("ADD_SPOT", { abd: "def" });
-    }, 5000);
+
   });
 });
