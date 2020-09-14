@@ -26,7 +26,7 @@ describe("Testing the connection via server sent events", () => {
   });
 
   it("should receive a response if a spot is created", async (done) => {
-    jest.setTimeout(60000);
+    jest.setTimeout(15000);
     let spotData: any;
 
     setTimeout(() => {
@@ -36,7 +36,7 @@ describe("Testing the connection via server sent events", () => {
     http.get(
       {
         agent: false,
-        hostname: "spotty.com",
+        hostname: "localhost",
         path: "/api/query/connect",
         port: 3000,
         headers: {
