@@ -19,7 +19,6 @@ const register = async () => {
             connect()
         }
     } catch (error) {
-        // console.log(error.response.data)
         if (error.response.status === 400) {
             console.log("User already registered. Logging in ...")
             login()

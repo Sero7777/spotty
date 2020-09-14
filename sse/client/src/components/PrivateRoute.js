@@ -3,7 +3,6 @@ import { Redirect, Route } from "react-router-dom"
 import { connect } from "react-redux"
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-    console.log(rest)
     return <Route
         {...rest}
         render={props =>
@@ -12,7 +11,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 }
 
 const mapStateToProps = state => {
-    console.log(state.user.username !== null ? true : false)
     return { auth: state.user.username !== null ? true : false }
 }
 

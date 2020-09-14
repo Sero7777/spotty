@@ -1,13 +1,13 @@
-name: tests-query
+name: tests-spots-sse
 
 on:
   pull_request:
     paths: 
-      - "polling/query/**"
+      - "sse/spots/**"
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: cd polling/query && npm install && npm run test:remote
+      - run: cd sse/spots && npm install && npm run test:remote

@@ -18,7 +18,6 @@ const register = async () => {
             connect()
         }
     } catch (error) {
-        // console.log(error.response.data)
         if (error.response.status === 400) {
             console.log("User already registered. Logging in ...")
             login()
@@ -47,7 +46,7 @@ const connect = () => {
         }
     }, (res) => {
         res.on("data", data => {
-            console.log("Receiving data")
+            console.log(Buffer.from(data, "base64").toString("utf-8"))
         })
     })
 }

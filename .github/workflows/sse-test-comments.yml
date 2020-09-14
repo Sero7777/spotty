@@ -1,13 +1,13 @@
-name: tests-spots
+name: tests-comments-sse
 
 on:
   pull_request:
     paths: 
-      - "polling/spots/**"
+      - "sse/comments/**"
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: cd polling/spots && npm install && npm run test:remote
+      - run: cd sse/comments && npm install && npm run test:remote

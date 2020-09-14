@@ -1,0 +1,13 @@
+name: tests-auth-websockets
+
+on:
+  pull_request:
+    paths: 
+      - "websockets/authentication/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: cd websockets/authentication && npm install && npm run test:remote

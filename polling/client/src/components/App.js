@@ -71,7 +71,9 @@ const App = (props) => {
                 <Route exact path="/list" component={ListView}>
                     {props.auth ? null : <Redirect to="/register" />}
                 </Route>
-                <Route exact path="/map" component={MapView} />
+                <Route exact path="/map" component={MapView} >
+                    {props.auth ? null : <Redirect to="/register" />}
+                </Route>
             </div>
         </BrowserRouter>
     )
