@@ -49,24 +49,19 @@ const App = (props) => {
     useEffect(() => {
         loggedIn.current = props.auth
         const connectToQueryService = async () => {
-            console.log("Reconnecting 1")
             const resStatus = await props.connectToQueryService()
             if (resStatus === 200 || resStatus == 504) {
                 if (loggedIn.current) {
-                    console.log("Reconnecting 2")
                     connectToQueryService()
                 }
             } else if (resStatus !== 404 && resStatus !== 502) setTimeout(() => {
-                 console.log(resStatus)
                 if (loggedIn.current) {
-                    console.log("Reconnecting 3")
                     connectToQueryService()
                 }
             }, 1000);
         }
 
         if (loggedIn.current) {
-            console.log("Reconnecting 4")
             connectToQueryService()
         }
     }, [props.auth])

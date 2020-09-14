@@ -33,9 +33,7 @@ const AddSpotsModal = (props) => {
 
     const onSubmit = async formValues => {
         formValues.upvotes = 0
-        console.log("Trying to create a spot")
         const res = await createSpot(formValues)
-        console.log("Received res in submit")
 
         if (res.status === 201) props.onDismiss()
 
