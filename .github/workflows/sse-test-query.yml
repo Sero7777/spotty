@@ -1,4 +1,4 @@
-name: tests-query
+name: tests-query-sse
 
 on:
   pull_request:

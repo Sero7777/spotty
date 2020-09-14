@@ -1,4 +1,4 @@
-name: tests-spots
+name: tests-spots-polling
 
 on:
   pull_request:

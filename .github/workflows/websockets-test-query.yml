@@ -1,4 +1,4 @@
-name: tests-query
+name: tests-query-websockets
 
 on:
   pull_request:

@@ -1,4 +1,4 @@
-name: tests-spots
+name: tests-spots-websockets
 
 on:
   pull_request:

@@ -1,4 +1,4 @@
-name: tests-comments
+name: tests-comments-longpolling
 
 on:
   pull_request:

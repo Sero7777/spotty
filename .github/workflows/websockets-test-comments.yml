@@ -1,4 +1,4 @@
-name: tests-comments
+name: tests-comments-websockets
 
 on:
   pull_request:

@@ -1,4 +1,4 @@
-name: tests-auth
+name: tests-auth-longpolling
 
 on:
   pull_request:

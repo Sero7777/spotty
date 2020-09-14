@@ -1,4 +1,4 @@
-name: tests-spots
+name: tests-spots-longpolling
 
 on:
   pull_request:
