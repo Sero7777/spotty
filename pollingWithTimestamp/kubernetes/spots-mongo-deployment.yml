@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spots-mongo-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: spots-mongo
+  template:
+    metadata:
+      labels:
+        name: spots-mongo
+    spec:
+      containers:
+        - name: spots-mongo
+          image: mongo

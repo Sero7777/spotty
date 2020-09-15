@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: comments-mongo-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: comments-mongo
+  template:
+    metadata:
+      labels:
+        name: comments-mongo
+    spec:
+      containers:
+        - name: comments-mongo
+          image: mongo
