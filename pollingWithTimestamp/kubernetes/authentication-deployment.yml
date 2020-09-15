@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: authentication-deployment
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            name: authentication
+    template:
+        metadata:
+            labels:
+                name: authentication
+        spec:
+            containers:
+                - name: authentication
+                  image: coffee51/authentication
+                  env:
+                    - name: JWT_SECRET
+                      valueFrom:
+                          secretKeyRef:
+                              name: jwt-secret
+                              key: JWT_SECRET
+                    - name: MONGO_URL
+                      value: "mongodb://authentication-mongo-service:27017/authentication"

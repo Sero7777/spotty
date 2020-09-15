@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: spots-service
+spec:
+  selector:
+    name: spots
+  ports:
+    - name: spots
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
