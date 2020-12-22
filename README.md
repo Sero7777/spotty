@@ -1,6 +1,8 @@
 # Spotty 
 This is a prototype of an application where users are able to create entries (so called spots) of various places they were at. Created spots can be displayed on a map or in a list view.
 
+**-- The MapToken is no longer valid, therefore the Map will not be displayed correctly --**
+
 ## Motivation
 
 The reason for creating this application was to being able to implement and test various types of communication between clients and servers as WebSockets, Server Sent Events and Long Polling/Polling. Therefore, the focus lies on implementing the different types of communication instead of perfectly written code.
